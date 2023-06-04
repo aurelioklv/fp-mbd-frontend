@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+      </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter'],
+                    },
+                },
+            },
+        };
+    </script>
+    <title>Konfirmasi Peminjaman</title>
+</head>
+<body class="bg-slate-50 grid place-items-center h-screen ">
+
+    <div class="container bg-white p-8 rounded-xl max-w-md space-y-8 shadow-sm">
+
+
+        <h1 class="font-inter font-bold text-slate-900 text-2xl">Konfirmasi Peminjaman<h1>
+
+        
+
+        <div class="grid grid-rows-2 gap-1 devide-y mb-3">
+            <div class="flex justify-between py-3">
+                <p class="text-slate-400 font-normal">Nominal Pinjaman</p>
+                <p class="text-orange-500 font-semibold text-lg">Rp 1.000.000</p>
+            </div>
+        
+            <div class="flex justify-between py-3">
+                <p class="text-slate-400 font-normal">Periode Pinjaman</p>
+                <p class="text-slate-800 font-semibold">3 Bulan</p>
+            </div>
+        </div>
+
+        <hr class="mb-3
+        ">
+
+        <div class="grid grid-rows-2 gap-1 devide-y mb-6">
+
+            <div class="flex justify-between py-3">
+                <p class="text-slate-400 font-normal">Bank Tujuan</p>
+                <p class="text-slate-800 font-semibold">BNI</p>
+            </div>
+
+            <div class="flex justify-between py-3">
+                <p class="text-slate-400 font-normal">No. Rekening Bank</p>
+                <p class="text-slate-800 font-semibold">137486280</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+            <button onclick="window.location.href='ajukanPeminjaman.html'" class="font-inter text-slate-800 outline outline-1 outline-slate-300 font-medium w-full py-2 px-8 rounded-md hover:bg-slate-50 focus:ring focus:ring-emerald-500">Kembali</button>
+
+            <button class="font-inter bg-emerald-500 text-white font-medium w-full py-2 px-8 rounded-md hover:bg-emerald-600">Pinjam</button>
+        </div>
+        
+
+    </div>
+    
+</body>
+</html>

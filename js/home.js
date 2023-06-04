@@ -30,32 +30,35 @@ fetch("http://localhost:5000/invoices")
       const invoiceElement = document.createElement("div");
       invoiceElement.id = invoice.li_id;
       invoiceElement.innerHTML = `
-        <div class="grid grid-cols-13 gap-5 justify-between text-align-start">
-          <div>
+        <div class="grid grid-cols-4 gap-5 justify-between text-align-start">
+          <div class="">
             <p class="text-sm text-slate-400 li_id">${invoice.li_id}</p>
             <h2 class="text-lg font-semibold text-slate-700 li_total_payment">
               ${money}
             </h2>
           </div>
-          <div class="col-start-5">
+          <div class="">
             <p class="text-sm text-slate-400">Tenggat Pembayaran</p>
             <h2 class="text-base font-semibold text-slate-700 li_due_date">
               ${date}
             </h2>
           </div>
-          <div class="my-auto col-start-9">
+          <div class="m-auto">
             <h2
               class="text-sm font-semibold text-emerald-600 bg-emerald-50 py-1 px-4 w-auto rounded-full text-center border border-emerald-300"
             >
               Sudah dibayar
             </h2>
           </div>
-          <button
-            class="col-start-13 font-inter bg-slate-100 text-slate-500 font-medium w-auto py-2 px-8 rounded-md disabled:opacity-50"
+          <div class="my-auto text-right">
+            <button
+            class=" font-inter bg-slate-100 text-slate-500 font-medium w-auto py-2 px-8 rounded-md disabled:opacity-50"
             disabled
-          >
-            Bayar
-          </button>
+            >
+              Bayar
+            </button>
+          </div>
+          
         </div>`;
       container.appendChild(invoiceElement);
       // container.appendChild("<hr />");
