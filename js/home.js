@@ -8,9 +8,6 @@ fetch("http://localhost:5000/invoices")
       year: "numeric",
       month: "long",
       day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
     };
 
     const formatter = new Intl.NumberFormat("id-ID", {
@@ -33,7 +30,7 @@ fetch("http://localhost:5000/invoices")
       const invoiceElement = document.createElement("div");
       invoiceElement.id = invoice.li_id;
       invoiceElement.innerHTML = `
-        <div class="grid grid-cols-13 gap-5 justify-items-start">
+        <div class="grid grid-cols-13 gap-5 justify-between text-align-start">
           <div>
             <p class="text-sm text-slate-400 li_id">${invoice.li_id}</p>
             <h2 class="text-lg font-semibold text-slate-700 li_total_payment">
