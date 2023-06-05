@@ -22,28 +22,29 @@
     <title>Aplikasi Pinjol Terpercaya</title>
   </head>
   <body class="bg-slate-50 h-full font-inter">
-    <div
-      class="container bg-white p-8 text-left rounded-xl max-w-5xl space-y-8 shadow-sm mx-auto my-8"
-    >
-
-      <div class="flex gap-2 content-center justify-between"> 
-        <h1 class="font-bold text-slate-900 text-2xl">Halo, Hanafi Satriyo Utomo Setiawan</h1>
-        <button onclick="window.location.href='akun.html'"  class="block my-auto outline outline-1 outline-slate-300 h-8 w-8 rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500"><?xml version="1.0"?><svg class="fill-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="person"><rect width="24" height="24" opacity="0"></rect><path d="M12 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0-6a2 2 0 1 1-2 2 2 2 0 0 1 2-2z"></path><path d="M12 13a7 7 0 0 0-7 7 1 1 0 0 0 2 0 5 5 0 0 1 10 0 1 1 0 0 0 2 0 7 7 0 0 0-7-7z"></path></g></g></svg></button>
+    <div class="container bg-white p-8 text-left rounded-xl max-w-5xl space-y-8 shadow-sm mx-auto my-8">
+      <div class="flex gap-2 content-center justify-between">
+        <h1 class="font-bold text-slate-900 text-2xl" id="acc_name"></h1>
+        <button onclick="window.location.href='akun.html'" class="block my-auto outline outline-1 outline-slate-300 h-8 w-8 rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">
+          <?xml version="1.0"?><svg class="fill-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <g data-name="Layer 2">
+              <g data-name="person">
+                <rect width="24" height="24" opacity="0"></rect>
+                <path d="M12 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0-6a2 2 0 1 1-2 2 2 2 0 0 1 2-2z"></path>
+                <path d="M12 13a7 7 0 0 0-7 7 1 1 0 0 0 2 0 5 5 0 0 1 10 0 1 1 0 0 0 2 0 7 7 0 0 0-7-7z"></path>
+              </g>
+            </g>
+          </svg>
+        </button>
       </div>
 
-      <div
-        class="outline outline-1 outline-slate-200 p-4 w-full rounded-md space-y-1"
-      >
+      <div class="outline outline-1 outline-slate-200 p-4 w-full rounded-md space-y-1">
         <div class="flex justify-between">
           <div>
             <p class="text-sm text-slate-400">Sisa Limit Peminjaman</p>
-            <h2 class="text-2xl font-bold text-emerald-500">Rp1.500.000</h2>
+            <h2 class="text-2xl font-bold text-emerald-500" id="acc_balance"></h2>
           </div>
-          <button
-            onclick="window.location.href='ajukanPeminjaman.html'" class="font-inter bg-emerald-500 text-white font-medium w-auto py-2 px-8 rounded-md hover:bg-emerald-600"
-          >
-            Ajukan Peminjaman
-          </button>
+          <button onclick="window.location.href='ajukanPeminjaman.html'" class="font-inter bg-emerald-500 text-white font-medium w-auto py-2 px-8 rounded-md hover:bg-emerald-600">Ajukan Peminjaman</button>
         </div>
       </div>
 
