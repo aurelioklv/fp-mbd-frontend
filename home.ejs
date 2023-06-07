@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              inter: ["Inter"],
+            },
+          },
+        },
+      };
+    </script>
+    <%
+      const locale = "id-ID";
+      const dateOptions = {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      };
+
+      const formatter = new Intl.NumberFormat(locale, {
+        style: "currency",
+        currency: "IDR",
+      });
+    %>
+    <title>Aplikasi Pinjol Terpercaya</title>
+  </head>
+  <body class="bg-slate-50 h-full font-inter">
+
+    <div class="container bg-white p-8 text-left rounded-xl max-w-5xl space-y-8 shadow-sm mx-auto my-8">
+      <div class="flex gap-2 content-center justify-between">
+        <h1 class="font-bold text-slate-900 text-2xl" id="acc_name"><%= user.acc_name %></h1>
+        <button onclick="window.location.href='/account'" class="block my-auto outline outline-1 outline-slate-300 h-8 w-8 rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">
+          <?xml version="1.0"?><svg class="fill-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <g data-name="Layer 2">
+              <g data-name="person">
+                <rect width="24" height="24" opacity="0"></rect>
+                <path d="M12 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0-6a2 2 0 1 1-2 2 2 2 0 0 1 2-2z"></path>
+                <path d="M12 13a7 7 0 0 0-7 7 1 1 0 0 0 2 0 5 5 0 0 1 10 0 1 1 0 0 0 2 0 7 7 0 0 0-7-7z"></path>
+              </g>
+            </g>
+          </svg>
+        </button>
+      </div>
+
+      <div class="outline outline-1 outline-slate-200 p-4 w-full rounded-md space-y-1">
+        <div class="flex justify-between">
+          <div>
+            <p class="text-sm text-slate-400"><%= user.acc_ktp_num %></p>
+            <p class="text-sm text-slate-400">Sisa Limit Peminjaman</p>
+            <h2 class="text-2xl font-bold text-emerald-500" id="acc_balance"><%= formatter.format(user.acc_balance) %></h2>
+          </div>
+          <button onclick="window.location.href='/transaction'" class="font-inter bg-emerald-500 text-white font-medium w-auto py-2 px-8 rounded-md hover:bg-emerald-600">Riwayat Transaksi</button>
+          <button onclick="window.location.href='/loan'" class="font-inter bg-emerald-500 text-white font-medium w-auto py-2 px-8 rounded-md hover:bg-emerald-600">Ajukan Peminjaman</button>
+        </div>
+      </div>
+
+      <div class="space-y-4 li_container">
+        <h2 class="font-semibold text-sm">Tagihan Anda</h2>
+        <%
+          const paidInvoices = invoices.filter((invoice) => invoice.li_status === false);
+          const billedInvoices = invoices.filter((invoice) => invoice.li_status === true);
+
+          const allInvoice = paidInvoices.concat(billedInvoices);
+          allInvoice.forEach(invoice => {
+          const date = new Date(invoice.li_due_date).toLocaleDateString(
+            locale,
+            dateOptions
+          );
+          const money = formatter.format(invoice.li_total_payment);
+        %>
+        <div class="grid grid-cols-4 gap-5 justify-between text-align-start">
+          <div class="">
+            <p class="text-sm text-slate-400 li_id"><%= invoice.li_id %></p>
+            <h2 class="text-lg font-semibold text-slate-700 li_total_payment"><%= money %></h2>
+          </div>
+          <div class="">
+            <p class="text-sm text-slate-400">Tenggat Pembayaran</p>
+            <h2 class="text-base font-semibold text-slate-700 li_due_date"><%= date %></h2>
+          </div>
+          <div class="m-auto">
+            <h2 class="text-sm font-semibold py-1 px-4 w-auto rounded-full text-center border <%= invoice.li_status ? 'text-emerald-600 bg-emerald-50 border-emerald-300' : 'text-red-600 bg-red-100 border-red-300'%>"><%= invoice.li_status ? "Sudah dibayar" : "Belum dibayar" %></h2>
+          </div>
+          <div class="my-auto text-right">
+            <button class="font-inter font-medium w-auto py-2 px-8 rounded-md <%= invoice.li_status? 'bg-slate-100 text-slate-500 disabled:opacity-50' : 'bg-orange-100 text-orange-500 hover:bg-orange-200'%>" <%- invoice.li_status? 'disable' : ''%>>Bayar</button>
+          </div>
+        </div>
+        <hr>
+        <% }) %>
+      </div>
+    </div>
+  </body>
+</html>

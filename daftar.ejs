@@ -25,7 +25,7 @@
     <div class="container bg-white p-8 text-left rounded-xl max-w-4xl space-y-8 shadow-sm mx-auto my-8">
       <h1 class="font-extrabold text-slate-900 text-3xl">Pendaftaran</h1>
 
-      <form action="http://localhost:5000/account" method="post" class="items-stretch space-y-4 mb-6" id="registration-form">
+      <form action="/signup" method="post" class="items-stretch space-y-4 mb-6" id="registration-form">
         <div class="grid grid-cols-2 space-x-8">
           <div class="space-y-4">
             <h1 class="font-semibold text-slate-900 text-sm">Data Diri</h1>
@@ -38,7 +38,7 @@
             <input required name="address" type="text" placeholder="Alamat Lengkap" class="bg-white outline outline-1 outline-slate-200 rounded-md h-10 p-4 w-full ring-0 focus:ring-2 ring-emerald-500 placeholder:text-slate-400" />
             <input required name="mother" type="text" placeholder="Nama Ibu Kandung" class="bg-white outline outline-1 outline-slate-200 rounded-md h-10 p-4 w-full ring-0 focus:ring-2 ring-emerald-500 placeholder:text-slate-400" />
             <input required name="job" type="text" placeholder="Pekerjaan" class="bg-white outline outline-1 outline-slate-200 rounded-md h-10 p-4 w-full ring-0 focus:ring-2 ring-emerald-500 placeholder:text-slate-400" />
-            <input required id="salary-input" name="salary" type="text" inputmode="numeric" placeholder="Gaji" oninput="formatNumber(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 46 || event.charCode === 0" class="bg-white outline outline-1 outline-slate-200 rounded-md h-10 p-4 w-full ring-0 focus:ring-2 ring-emerald-500 placeholder:text-slate-400" />
+            <input required id="salary-input" name="salary" maxlength="10" type="text" inputmode="numeric" placeholder="Gaji" oninput="formatNumber(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 46 || event.charCode === 0" class="bg-white outline outline-1 outline-slate-200 rounded-md h-10 p-4 w-full ring-0 focus:ring-2 ring-emerald-500 placeholder:text-slate-400" />
           </div>
           <div class="space-y-4">
             <h1 class="font-semibold text-slate-900 text-sm">Informasi Bank</h1>
@@ -74,12 +74,77 @@
         <br />
 
         <div class="flex justify-between">
-          <p class="font-inter text-sm text-slate-400 block my-auto">Sudah punya akun? <a href="./login.html" class="text-emerald-500 font-semibold hover:text-emerald-600">Masuk</a></p>
+          <p class="font-inter text-sm text-slate-400 block my-auto">Sudah punya akun? <a href="/login" class="text-emerald-500 font-semibold hover:text-emerald-600">Masuk</a></p>
           <button class="font-inter bg-emerald-500 text-white font-medium w-auto py-2 px-6 rounded-md hover:bg-emerald-600" id="submit-button">Daftar Sekarang</button>
         </div>
       </form>
     </div>
-    <script src="cdnjs/crypto-js.min.js"></script>
-    <script src="js/daftar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+      const form = document.getElementById("registration-form");
+      const salaryInput = document.getElementById("salary-input");
+
+      function formatNumber(input) {
+        const value = input.value.replace(/[.,]/g, "");
+        const formattedValue = new Intl.NumberFormat("id-ID").format(value);
+
+        input.value = formattedValue;
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        let salary = salaryInput.value;
+        salary = salary.replace(/\./g, "");
+        salaryInput.value = salary;
+
+        form.submit();
+      });
+
+      let emailTimeoutId = null;
+      let ktpTimeoutId = null;
+
+      $("#email-input").on("input", function () {
+        const email = $(this).val();
+        console.log(email);
+        clearTimeout(emailTimeoutId);
+
+        emailTimeoutId = setTimeout(async () => {
+          try {
+            const response = await fetch(`/check-email-exists?email=${email}`);
+            const data = await response.json();
+
+            if (data.email_exists) {
+              this.setCustomValidity("Email already exists");
+            } else {
+              this.setCustomValidity("");
+            }
+          } catch (err) {
+            console.log(err.message);
+          }
+        }, 300);
+      });
+
+      $("#ktp-input").on("input", function () {
+        const ktp = $(this).val();
+
+        clearTimeout(ktpTimeoutId);
+
+        ktpTimeoutId = setTimeout(async () => {
+          try {
+            const response = await fetch(`/check-ktp-exists?ktp=${ktp}`);
+            const data = await response.json();
+
+            if (data.ktp_exists) {
+              this.setCustomValidity("KTP already exists");
+            } else {
+              this.setCustomValidity("");
+            }
+          } catch (err) {
+            console.log(err.message);
+          }
+        }, 300);
+      });
+    </script>
   </body>
 </html>

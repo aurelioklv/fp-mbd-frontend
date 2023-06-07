@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              inter: ["Inter"],
+            },
+          },
+        },
+      };
+    </script>
+    <% const locale = "id-ID"; const dateOptions = { year: "numeric", month: "long", day: "numeric", }; const formatter = new Intl.NumberFormat(locale, { style: "currency", currency: "IDR", }); %>
+    <title>Aplikasi Pinjol Terpercaya</title>
+  </head>
+  <body class="bg-slate-50 h-full font-inter">
+    <div class="container bg-white p-8 text-left rounded-xl max-w-5xl space-y-8 shadow-sm mx-auto my-8">
+      <div class="flex gap-2 content-center justify-between">
+        <h1 class="font-bold text-slate-900 text-2xl" id="acc_name"><%= user.acc_name %></h1>
+        <a href="/home">
+          <button class="block my-auto outline outline-1 outline-slate-300 h-8 w-8 rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">
+            <?xml version="1.0"?><svg class="fill-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <g data-name="Layer 2">
+                <g data-name="home">
+                  <rect width="24" height="24" opacity="0"></rect>
+                  <path d="M20.42 10.18L12.71 2.3a1 1 0 0 0-1.42 0l-7.71 7.89A2 2 0 0 0 3 11.62V20a2 2 0 0 0 1.89 2h14.22A2 2 0 0 0 21 20v-8.38a2.07 2.07 0 0 0-.58-1.44zM10 20v-6h4v6zm9 0h-3v-7a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v7H5v-8.42l7-7.15 7 7.19z"></path>
+                </g>
+              </g>
+            </svg>
+          </button>
+        </a>
+      </div>
+
+      <div class="outline outline-1 outline-slate-200 p-4 w-full rounded-md space-y-1">
+        <div class="flex justify-between">
+          <div>
+            <p class="text-sm text-slate-400"><%= user.acc_ktp_num %></p>
+            <p class="text-sm text-slate-400">Sisa Limit Peminjaman</p>
+            <h2 class="text-2xl font-bold text-emerald-500" id="acc_balance"><%= formatter.format(user.acc_balance) %></h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-4 li_container">
+        <h2 class="font-semibold text-sm">Riwayat Transaksi</h2>
+        <% transactions.forEach(transaction => { const date = new Date(transaction.t_date).toLocaleDateString( locale, dateOptions ); const money = formatter.format(transaction.t_loan); const complete = transaction.t_payment_count === transaction.t_lt_period; %>
+        <div class="grid grid-cols-4 gap-5 justify-between text-align-start">
+          <div class="">
+            <p class="text-sm text-slate-400 li_id"><%= transaction.t_id %></p>
+            <h2 class="text-lg font-semibold text-slate-700 li_total_payment"><%= money %></h2>
+          </div>
+          <div class="">
+            <p class="text-sm text-slate-400">Tenggat Pembayaran</p>
+            <h2 class="text-base font-semibold text-slate-700 li_due_date"><%= date %></h2>
+          </div>
+          <div class="m-auto">
+            <h2 class="text-sm font-semibold py-1 px-4 w-auto rounded-full text-center border <%= complete ? 'text-emerald-600 bg-emerald-50 border-emerald-300' : 'text-red-600 bg-red-100 border-red-300'%>"><%= complete ? "Sudah Lunas" : "Belum Lunas" %></h2>
+          </div>
+          <div class="my-auto text-right"></div>
+        </div>
+        <hr />
+        <% }) %>
+      </div>
+    </div>
+  </body>
+</html>
