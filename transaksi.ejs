@@ -20,12 +20,13 @@
       };
     </script>
     <% const locale = "id-ID"; const dateOptions = { year: "numeric", month: "long", day: "numeric", }; const formatter = new Intl.NumberFormat(locale, { style: "currency", currency: "IDR", }); %>
-    <title>Aplikasi Pinjol Terpercaya</title>
+    <title>Riwayat Transaksi</title>
   </head>
   <body class="bg-slate-50 h-full font-inter">
     <div class="container bg-white p-8 text-left rounded-xl max-w-5xl space-y-8 shadow-sm mx-auto my-8">
       <div class="flex gap-2 content-center justify-between">
-        <h1 class="font-bold text-slate-900 text-2xl" id="acc_name"><%= user.acc_name %></h1>
+        <!-- <h1 class="font-bold text-slate-900 text-2xl" id="acc_name"><%= user.acc_name %></h1> -->
+        <h1 class="font-bold text-slate-900 text-2xl">Riwayat Transaksi</h1>
         <a href="/home">
           <button class="block my-auto outline outline-1 outline-slate-300 h-8 w-8 rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">
             <?xml version="1.0"?><svg class="fill-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -40,7 +41,7 @@
         </a>
       </div>
 
-      <div class="outline outline-1 outline-slate-200 p-4 w-full rounded-md space-y-1">
+      <!-- <div class="outline outline-1 outline-slate-200 p-4 w-full rounded-md space-y-1">
         <div class="flex justify-between">
           <div>
             <p class="text-sm text-slate-400"><%= user.acc_ktp_num %></p>
@@ -48,10 +49,10 @@
             <h2 class="text-2xl font-bold text-emerald-500" id="acc_balance"><%= formatter.format(user.acc_balance) %></h2>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="space-y-4 li_container">
-        <h2 class="font-semibold text-sm">Riwayat Transaksi</h2>
+        <!-- <h2 class="font-semibold text-sm">Riwayat Transaksi</h2> -->
         <% transactions.forEach(transaction => { const date = new Date(transaction.t_date).toLocaleDateString( locale, dateOptions ); const money = formatter.format(transaction.t_loan); const complete = transaction.t_payment_count === transaction.t_lt_period; %>
         <div class="grid grid-cols-4 gap-5 justify-between text-align-start">
           <div class="">
@@ -59,7 +60,7 @@
             <h2 class="text-lg font-semibold text-slate-700 li_total_payment"><%= money %></h2>
           </div>
           <div class="">
-            <p class="text-sm text-slate-400">Tenggat Pembayaran</p>
+            <p class="text-sm text-slate-400">Tanggal Peminjaman</p>
             <h2 class="text-base font-semibold text-slate-700 li_due_date"><%= date %></h2>
           </div>
           <div class="m-auto">
