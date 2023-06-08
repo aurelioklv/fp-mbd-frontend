@@ -38,7 +38,8 @@
             <input required name="address" type="text" placeholder="Alamat Lengkap" class="bg-white outline outline-1 outline-slate-200 rounded-md h-10 p-4 w-full ring-0 focus:ring-2 ring-emerald-500 placeholder:text-slate-400" />
             <input required name="mother" type="text" placeholder="Nama Ibu Kandung" class="bg-white outline outline-1 outline-slate-200 rounded-md h-10 p-4 w-full ring-0 focus:ring-2 ring-emerald-500 placeholder:text-slate-400" />
             <input required name="job" type="text" placeholder="Pekerjaan" class="bg-white outline outline-1 outline-slate-200 rounded-md h-10 p-4 w-full ring-0 focus:ring-2 ring-emerald-500 placeholder:text-slate-400" />
-            <input required id="salary-input" name="salary" maxlength="10" type="text" inputmode="numeric" placeholder="Gaji" oninput="formatNumber(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 46 || event.charCode === 0" class="bg-white outline outline-1 outline-slate-200 rounded-md h-10 p-4 w-full ring-0 focus:ring-2 ring-emerald-500 placeholder:text-slate-400" />
+            <input required id="salary-input-formatted" name="salary_formatted" maxlength="10" type="text" inputmode="numeric" placeholder="Gaji" oninput="formatNumber(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 46 || event.charCode === 0" class="bg-white outline outline-1 outline-slate-200 rounded-md h-10 p-4 w-full ring-0 focus:ring-2 ring-emerald-500 placeholder:text-slate-400" />
+            <input type="hidden" name="salary" id="salary-input" />
           </div>
           <div class="space-y-4">
             <h1 class="font-semibold text-slate-900 text-sm">Informasi Bank</h1>
@@ -83,6 +84,7 @@
     <script>
       const form = document.getElementById("registration-form");
       const salaryInput = document.getElementById("salary-input");
+      const salaryInputFormatted = document.getElementById("salary-input-formatted");
 
       function formatNumber(input) {
         const value = input.value.replace(/[.,]/g, "");
@@ -94,7 +96,7 @@
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        let salary = salaryInput.value;
+        let salary = salaryInputFormatted.value;
         salary = salary.replace(/\./g, "");
         salaryInput.value = salary;
 
