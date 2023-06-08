@@ -59,26 +59,12 @@
 
       <div class="grid grid-cols-2 gap-4">
         <a href="/home" class="font-inter text-slate-800 outline outline-1 outline-slate-300 font-medium w-full py-2 px-8 rounded-md hover:bg-slate-50 focus:ring focus:ring-emerald-500">Kembali</a>
+        <form id="pay-form" action="/pay" method="POST" style="display: none">
+          <input type="hidden" name="id" id="invoice-id" value="<%= invoice.li_id %>" />
+        </form>
 
-        <button id="pay-button" class="font-inter bg-emerald-500 text-white font-medium w-full py-2 px-8 rounded-md hover:bg-emerald-600">Bayar</button>
+        <button onclick="document.getElementById('pay-form').submit()" class="font-inter bg-emerald-500 text-white font-medium w-full py-2 px-8 rounded-md hover:bg-emerald-600">Bayar</button>
       </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-      $(document).ready(function () {
-        $("#pay-button").click(function () {
-          var invoiceId = "<%= invoice.li_id %>";
-          console.log(invoiceId);
-          // Make the AJAX POST request to the API endpoint
-          $.ajax({
-            url: `/pay?id=${invoiceId}`,
-            method: "POST",
-            error: function (xhr, status, error) {
-              console.error(error);
-            },
-          });
-        });
-      });
-    </script>
   </body>
 </html>
