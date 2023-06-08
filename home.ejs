@@ -39,17 +39,23 @@
     <div class="container bg-white p-8 text-left rounded-xl max-w-5xl space-y-8 shadow-sm mx-auto my-8">
       <div class="flex gap-2 content-center justify-between">
         <h1 class="font-bold text-slate-900 text-2xl" id="acc_name"><%= user.acc_name %></h1>
-        <button onclick="window.location.href='/account'" class="block my-auto outline outline-1 outline-slate-300 h-8 w-8 rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">
-          <?xml version="1.0"?><svg class="fill-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <g data-name="Layer 2">
-              <g data-name="person">
-                <rect width="24" height="24" opacity="0"></rect>
-                <path d="M12 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0-6a2 2 0 1 1-2 2 2 2 0 0 1 2-2z"></path>
-                <path d="M12 13a7 7 0 0 0-7 7 1 1 0 0 0 2 0 5 5 0 0 1 10 0 1 1 0 0 0 2 0 7 7 0 0 0-7-7z"></path>
+        <div>
+          <button onclick="window.location.href='/account'" class="block my-auto outline outline-1 outline-slate-300 h-8 w-8 rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">
+            <?xml version="1.0"?><svg class="fill-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <g data-name="Layer 2">
+                <g data-name="person">
+                  <rect width="24" height="24" opacity="0"></rect>
+                  <path d="M12 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0-6a2 2 0 1 1-2 2 2 2 0 0 1 2-2z"></path>
+                  <path d="M12 13a7 7 0 0 0-7 7 1 1 0 0 0 2 0 5 5 0 0 1 10 0 1 1 0 0 0 2 0 7 7 0 0 0-7-7z"></path>
+                </g>
               </g>
-            </g>
-          </svg>
-        </button>
+            </svg>
+          </button>
+          <button onclick="window.location.href='/logout'" class="block my-auto outline outline-1 outline-slate-300 h-8 w-8 rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500 bg-red-100">
+            <?xml version="1.0"?>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M3 3.25c0-.966.784-1.75 1.75-1.75h5.5a.75.75 0 0 1 0 1.5h-5.5a.25.25 0 0 0-.25.25v17.5c0 .138.112.25.25.25h5.5a.75.75 0 0 1 0 1.5h-5.5A1.75 1.75 0 0 1 3 20.75Zm16.006 9.5H10.75a.75.75 0 0 1 0-1.5h8.256l-3.3-3.484a.75.75 0 0 1 1.088-1.032l4.5 4.75a.75.75 0 0 1 0 1.032l-4.5 4.75a.75.75 0 0 1-1.088-1.032Z"></path></svg>
+          </button>
+        </div>
       </div>
 
       <div class="outline outline-1 outline-slate-200 p-4 w-full rounded-md space-y-1">
