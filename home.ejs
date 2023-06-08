@@ -83,7 +83,7 @@
             <p class="text-sm text-slate-500"></p>
           </div>
         </div>
-        <% const paidInvoices = invoices.filter((invoice) => invoice.li_status === false); const billedInvoices = invoices.filter((invoice) => invoice.li_status === true); const allInvoice = paidInvoices.concat(billedInvoices); allInvoice.forEach(invoice => { const date = new Date(invoice.li_due_date).toLocaleDateString( locale, dateOptions ); const money = formatter.format(invoice.li_total_payment); %>
+        <% const paidInvoices = invoices.filter((invoice) => invoice.li_status === true); const billedInvoices = invoices.filter((invoice) => invoice.li_status === false); const allInvoice = billedInvoices.concat(paidInvoices); allInvoice.forEach(invoice => { const date = new Date(invoice.li_due_date).toLocaleDateString( locale, dateOptions ); const money = formatter.format(invoice.li_total_payment); %>
         <div class="grid grid-cols-4 gap-5 justify-between text-align-start">
           <div class="pl-4">
             <p class="text-sm text-slate-400 li_id"><%= invoice.li_id %></p>
