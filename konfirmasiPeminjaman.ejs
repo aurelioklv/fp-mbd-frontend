@@ -23,7 +23,7 @@
     <title>Konfirmasi Peminjaman</title>
   </head>
   <body class="bg-slate-50 grid place-items-center h-screen">
-    <div class="container bg-white p-8 rounded-xl max-w-md space-y-8 shadow-sm">
+    <form action="/transaction" method="post" class="container bg-white p-8 rounded-xl max-w-md space-y-8 shadow-sm">
       <h1 class="font-inter font-bold text-slate-900 text-2xl">Konfirmasi Peminjaman</h1>
 
       <div class="grid grid-rows-2 gap-1 devide-y mb-3">
@@ -52,11 +52,14 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-2 gap-4">
-        <button onclick="window.location.href='/loan'" class="font-inter text-slate-800 outline outline-1 outline-slate-300 font-medium w-full py-2 px-8 rounded-md hover:bg-slate-50 focus:ring focus:ring-emerald-500">Kembali</button>
+      <input type="hidden" name="loan" value="<%= confirmation.loan %>" />
+      <input type="hidden" name="period" value="<%= confirmation.period %>" />
 
-        <button class="font-inter bg-emerald-500 text-white font-medium w-full py-2 px-8 rounded-md hover:bg-emerald-600">Pinjam</button>
+      <div class="grid grid-cols-2 gap-4">
+        <a href="/loan" class="font-inter text-slate-800 outline outline-1 outline-slate-300 font-medium w-full py-2 px-8 rounded-md hover:bg-slate-50 focus:ring focus:ring-emerald-500">Kembali</a>
+
+        <button type="submit" class="font-inter bg-emerald-500 text-white font-medium w-full py-2 px-8 rounded-md hover:bg-emerald-600">Pinjam</button>
       </div>
-    </div>
+    </form>
   </body>
 </html>
