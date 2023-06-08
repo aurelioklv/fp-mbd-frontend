@@ -19,23 +19,10 @@
         },
       };
     </script>
-    <%
-      const locale = "id-ID";
-      const dateOptions = {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      };
-
-      const formatter = new Intl.NumberFormat(locale, {
-        style: "currency",
-        currency: "IDR",
-      });
-    %>
+    <% const locale = "id-ID"; const dateOptions = { year: "numeric", month: "long", day: "numeric", }; const formatter = new Intl.NumberFormat(locale, { style: "currency", currency: "IDR", }); %>
     <title>Aplikasi Pinjol Terpercaya</title>
   </head>
   <body class="bg-slate-50 h-full font-inter">
-
     <div class="container bg-white p-8 text-left rounded-xl max-w-5xl space-y-8 shadow-sm mx-auto my-8">
       <div class="flex gap-2 content-center justify-between">
         <h1 class="font-bold text-slate-900 text-2xl" id="acc_name">Halo, <%= user.acc_name %></h1>
@@ -53,15 +40,15 @@
           </button>
           <button onclick="window.location.href='/logout'" class="block my-auto outline outline-1 outline-slate-300 h-8 w-8 rounded-lg p-1 hover:bg-red-50 hover:outline-red-400 focus:ring focus:ring-red-500">
             <?xml version="1.0"?>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-red-400">
-                  <g data-name="Layer 2">
-                      <g data-name="log-out">
-                          <rect width="24" height="24" transform="rotate(90 12 12)" opacity="0"></rect>
-                          <path d="M7 6a1 1 0 0 0 0-2H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h2a1 1 0 0 0 0-2H6V6z"></path>
-                          <path d="M20.82 11.42l-2.82-4a1 1 0 0 0-1.39-.24 1 1 0 0 0-.24 1.4L18.09 11H10a1 1 0 0 0 0 2h8l-1.8 2.4a1 1 0 0 0 .2 1.4 1 1 0 0 0 .6.2 1 1 0 0 0 .8-.4l3-4a1 1 0 0 0 .02-1.18z"></path>
-                      </g>
-                  </g>
-              </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-red-400">
+              <g data-name="Layer 2">
+                <g data-name="log-out">
+                  <rect width="24" height="24" transform="rotate(90 12 12)" opacity="0"></rect>
+                  <path d="M7 6a1 1 0 0 0 0-2H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h2a1 1 0 0 0 0-2H6V6z"></path>
+                  <path d="M20.82 11.42l-2.82-4a1 1 0 0 0-1.39-.24 1 1 0 0 0-.24 1.4L18.09 11H10a1 1 0 0 0 0 2h8l-1.8 2.4a1 1 0 0 0 .2 1.4 1 1 0 0 0 .6.2 1 1 0 0 0 .8-.4l3-4a1 1 0 0 0 .02-1.18z"></path>
+                </g>
+              </g>
+            </svg>
           </button>
         </div>
       </div>
@@ -74,7 +61,7 @@
             <h2 class="text-2xl font-bold text-emerald-500" id="acc_balance"><%= formatter.format(user.acc_balance) %></h2>
           </div>
           <div class="grid grid-cols-2 gap-3">
-            <button onclick="window.location.href='/transaction'" class="font-inter outline outline-1 outline-slate-300 text-slate-700 font-medium w-auto py-2 px-8 rounded-md hover:bg-slate-50 focus:ring focus:ring-emerald-500 ">Riwayat Transaksi</button>
+            <button onclick="window.location.href='/transaction'" class="font-inter outline outline-1 outline-slate-300 text-slate-700 font-medium w-auto py-2 px-8 rounded-md hover:bg-slate-50 focus:ring focus:ring-emerald-500">Riwayat Transaksi</button>
             <button onclick="window.location.href='/loan'" class="font-inter bg-emerald-500 text-white font-medium w-auto py-2 px-8 rounded-md hover:bg-emerald-600">Ajukan Peminjaman</button>
           </div>
         </div>
@@ -96,18 +83,7 @@
             <p class="text-sm text-slate-500"></p>
           </div>
         </div>
-        <%
-          const paidInvoices = invoices.filter((invoice) => invoice.li_status === false);
-          const billedInvoices = invoices.filter((invoice) => invoice.li_status === true);
-
-          const allInvoice = paidInvoices.concat(billedInvoices);
-          allInvoice.forEach(invoice => {
-          const date = new Date(invoice.li_due_date).toLocaleDateString(
-            locale,
-            dateOptions
-          );
-          const money = formatter.format(invoice.li_total_payment);
-        %>
+        <% const paidInvoices = invoices.filter((invoice) => invoice.li_status === false); const billedInvoices = invoices.filter((invoice) => invoice.li_status === true); const allInvoice = paidInvoices.concat(billedInvoices); allInvoice.forEach(invoice => { const date = new Date(invoice.li_due_date).toLocaleDateString( locale, dateOptions ); const money = formatter.format(invoice.li_total_payment); %>
         <div class="grid grid-cols-4 gap-5 justify-between text-align-start">
           <div class="pl-4">
             <p class="text-sm text-slate-400 li_id"><%= invoice.li_id %></p>
@@ -121,10 +97,14 @@
             <h2 class="text-xs font-semibold py-1 px-4 w-auto rounded-full text-center border <%= invoice.li_status ? 'text-emerald-600 bg-emerald-50 border-emerald-300' : 'text-red-600 bg-red-50 border-red-300'%>"><%= invoice.li_status ? "Sudah dibayar" : "Belum dibayar" %></h2>
           </div>
           <div class="my-auto text-right pr-4">
-            <button class="font-inter font-medium w-auto py-2 px-8 rounded-md <%= invoice.li_status? 'outline outline-1 outline-slate-300 text-slate-500 disabled:opacity-50' : 'outline outline-1 outline-slate-300 text-slate-700 hover:bg-slate-50'%>" <%- invoice.li_status? 'disable' : ''%>>Bayar</button>
+            <% if (invoice.li_status) { %>
+            <button data-li_id="<%= invoice.li_id %>" class="font-inter font-medium w-auto py-2 px-8 rounded-md outline outline-1 outline-slate-300 text-slate-500 disabled:opacity-50" disabled>Bayar</button>
+            <% } else { %>
+            <button data-li_id="<%= invoice.li_id %>" onclick="window.location.href='/invoice?id=<%= invoice.li_id %>'" class="font-inter font-medium w-auto py-2 px-8 rounded-md outline outline-1 outline-slate-300 text-slate-700 hover:bg-slate-50">Bayar</button>
+            <% } %>
           </div>
         </div>
-        <hr>
+        <hr />
         <% }) %>
       </div>
     </div>
