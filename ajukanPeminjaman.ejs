@@ -83,11 +83,11 @@
 
         loanTimeout = setTimeout(async () => {
           try {
-            const response = await fetch(`/get-account-balance`);
+            const response = await fetch(`/get-account-info`);
             const data = await response.json();
-            console.log(loanRequest, data.balance);
+            console.log(loanRequest, data.user.acc_balance);
 
-            if (!validate(loanRequest, data.balance)) {
+            if (!validate(loanRequest, data.user.acc_balance)) {
               this.setCustomValidity("Insufficient Balance");
             } else {
               this.setCustomValidity("");
