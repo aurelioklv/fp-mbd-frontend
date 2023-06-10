@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              inter: ["Inter"],
+            },
+          },
+        },
+      };
+    </script>
+    <% const locale = "id-ID"; const dateOptions = { year: "numeric", month: "long", day: "numeric", }; const formatter = new Intl.NumberFormat(locale, { style: "currency", currency: "IDR", }); %>
+    <title>Ajukan Peminjaman</title>
+  </head>
+  <body class="bg-slate-50 grid place-items-center h-screen">
+    <div class="container bg-white p-8 rounded-xl max-w-md space-y-8 shadow-sm">
+      <h1 class="font-inter font-bold text-slate-900 text-2xl">Ajukan Peminjaman</h1>
+
+      <div class="bg-orange-50 p-4 w-full rounded-md space-y-1">
+        <div class="flex justify-between">
+          <p class="text-sm text-orange-400 mb-1 my-auto font-medium">Limit Peminjaman</p>
+          <h2 class="text-2xl font-bold text-orange-500"><%= formatter.format(user.acc_balance) %></h2>
+        </div>
+      </div>
+
+      <form action="/confirm" method="post" class="items-stretch space-y-4 my-6" id="loan-form">
+        <input required id="loan-amount-input-formatted" name="formatted_loan" placeholder="Nominal Peminjaman" maxlength="10" type="text" inputmode="numeric" oninput="formatNumber(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 46 || event.charCode === 0" class="bg-white outline outline-1 outline-slate-200 rounded-md h-10 p-4 w-full ring-0 focus:ring-2 ring-emerald-500 placeholder:text-slate-400 invalid:text-red-500 invalid:ring-red-500" />
+        <input type="hidden" name="loan" id="loan-amount-input" />
+        <select required name="period" id="period-select" class="bg-white outline outline-1 outline-slate-200 rounded-md h-auto p-2 w-full ring-0 focus:ring-2 ring-emerald-500 placeholder:text-slate-400 -webkit-appearance: none;">
+          <option value="1">1 Bulan</option>
+          <option value="3">3 Bulan</option>
+          <option value="6">6 Bulan</option>
+          <option value="12">12 Bulan</option>
+        </select>
+        <div class="grid grid-cols-2 gap-4 pt-3">
+          <a href="/home" class="text-center font-inter text-slate-800 outline outline-1 outline-slate-300 font-medium w-full py-2 px-8 rounded-md hover:bg-slate-50 focus:ring focus:ring-emerald-500">Batalkan</a>
+
+          <button type="submit" class="font-inter bg-emerald-500 text-white font-medium w-full py-2 px-8 rounded-md hover:bg-emerald-600">Selanjutnya</button>
+        </div>
+      </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+      const loanForm = document.getElementById("loan-form");
+      const loanAmountInput = document.getElementById("loan-amount-input");
+      const loanAmountInputFormatted = document.getElementById("loan-amount-input-formatted");
+      const loanPeriodSelect = document.getElementById("period-select");
+      let loanTimeout = null;
+
+      function formatNumber(input) {
+        const value = input.value.replace(/[.,]/g, "");
+
+        let loanAmount = input.value;
+        loanAmount = loanAmount.replace(/\./g, "");
+        loanAmountInput.value = loanAmount;
+
+        const formattedValue = new Intl.NumberFormat("id-ID").format(value);
+
+        input.value = formattedValue;
+      }
+
+      function validate(loan, balance) {
+        const v1 = parseFloat(loan);
+        const v2 = parseFloat(balance);
+
+        return v1 <= v2;
+      }
+
+      $("#loan-amount-input-formatted").on("input", function () {
+        const loanRequest = loanAmountInput.value;
+        console.log(loanRequest);
+        clearTimeout(loanTimeout);
+
+        loanTimeout = setTimeout(async () => {
+          try {
+            const response = await fetch(`/get-account-info`);
+            const data = await response.json();
+            console.log(loanRequest, data.user.acc_balance);
+
+            if (!validate(loanRequest, data.user.acc_balance)) {
+              this.setCustomValidity("Insufficient Balance");
+            } else {
+              this.setCustomValidity("");
+            }
+          } catch (err) {
+            console.log(err.message);
+          }
+        }, 300);
+      });
+
+      loanForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        let loanAmount = loanAmountInputFormatted.value;
+        loanAmount = loanAmount.replace(/\./g, "");
+        loanAmountInput.value = loanAmount;
+
+        loanForm.submit();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              inter: ["Inter"],
+            },
+          },
+        },
+      };
+    </script>
+    <title>Document</title>
+  </head>
+  <body class="bg-slate-50 grid place-items-center h-screen">
+    <div class="container bg-white p-8 text-center rounded-xl max-w-sm space-y-8 shadow-sm">
+      <h1 class="font-inter font-extrabold text-slate-900 text-3xl">inipinjol.</h1>
+      <form class="items-stretch space-y-4 mb-6" id="login-form">
+        <input required id="email-input" name="email" type="email" placeholder="Email" class="bg-white outline outline-1 outline-slate-200 rounded-md h-10 p-4 w-full ring-0 focus:ring-2 ring-emerald-500 placeholder:text-slate-400 invalid:text-red-500 invalid:ring-red-500" />
+        <input required id="password-input" name="password" type="password" placeholder="Password" class="bg-white outline outline-1 outline-slate-200 rounded-md h-10 p-4 w-full ring-0 focus:ring-2 ring-emerald-500 placeholder:text-slate-400" />
+        <button class="font-inter bg-emerald-500 text-white font-medium w-full py-2 px-8 rounded-md hover:bg-emerald-600 mb-6" id="submit-button">Masuk</button>
+      </form>
+
+      <p class="font-inter text-sm text-slate-400">Belum punya akun? <a href="/signup" class="text-emerald-500 font-semibold hover:text-emerald-600">Daftar Sekarang</a></p>
+    </div>
+    <script>
+      const loginForm = document.getElementById("login-form");
+      loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const email = document.getElementById("email-input").value;
+        const password = document.getElementById("password-input").value;
+
+        const response = await fetch("/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        if (response.ok) {
+          // Redirect to the home page
+          window.location.href = "/home";
+        } else {
+          const errorData = await response.json();
+          const errorMessage = errorData.message;
+          displayErrorMessage(errorMessage);
+        }
+      });
+
+      // Function to display the error message in a popup
+      function displayErrorMessage(message) {
+        // const errorMessageElement = document.getElementById("error-message");
+        // errorMessageElement.innerText = message;
+        // errorMessageElement.style.display = "block";
+
+        // You can use a library like SweetAlert or create a custom popup/modal to display the error message
+        // Here's an example using the built-in JavaScript `alert()` function:
+        alert(message);
+      }
+    </script>
+  </body>
+</html>
