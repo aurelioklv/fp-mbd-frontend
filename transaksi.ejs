@@ -88,7 +88,7 @@
             <h2 class="text-xs font-semibold py-2 px-4 w-auto rounded-full text-center <%= complete ? 'text-green-600 bg-green-50' : 'text-rose-400 bg-rose-50'%>"><%= complete ? "Sudah Lunas" : "Belum Lunas" %></h2>
           </div>
           <div class="my-auto text-right pr-4">
-            <button data-modal-target="small-modal" data-modal-toggle="small-modal" class="h-10 w-10 rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">
+            <button data-modal-target="<%= `modal-${transaction.t_id}` %>" data-modal-toggle="<%= `modal-${transaction.t_id}` %>" class="h-10 w-10 rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">
               <?xml version="1.0"?><svg class="fill-slate-400 p-1 hover:fill-slate-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g data-name="Layer 2">
                   <g data-name="info">
@@ -103,7 +103,7 @@
           </div>
         </div>
         <hr />
-        <div id="small-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 w-full p-4 hidden overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div id="<%= `modal-${transaction.t_id}` %>" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 w-full p-4 hidden overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
           <div class="relative w-full max-w-md max-h-full">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow">
