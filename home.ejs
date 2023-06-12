@@ -63,7 +63,6 @@
               <?xml  version="1.0"?><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 20 20" class="fill-emerald-500"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 4C2.89543 4 2 4.89543 2 6V10C2 11.1046 2.89543 12 4 12V6H14C14 4.89543 13.1046 4 12 4H4ZM6 10C6 8.89543 6.89543 8 8 8H16C17.1046 8 18 8.89543 18 10V14C18 15.1046 17.1046 16 16 16H8C6.89543 16 6 15.1046 6 14V10ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z"></path></svg>
               <h2 class="text-2xl font-bold text-emerald-500" id="acc_balance"><%= formatter.format(user.acc_balance) %></h2>
             </div>
-            
           </div>
           <div class="grid grid-cols-2 gap-3">
             <button onclick="window.location.href='/transaction'" class="font-inter outline outline-1 outline-slate-300 text-slate-700 font-medium w-auto py-2 px-8 rounded-md hover:bg-slate-50 focus:ring focus:ring-emerald-500">Riwayat Transaksi</button>
@@ -79,7 +78,7 @@
             <p class="text-sm text-slate-500 li_id pl-4">Nominal Tagihan</p>
           </div>
           <div class="m-auto">
-            <p class=" text-sm text-slate-500 li_id">Tagihan ke</p>
+            <p class="text-sm text-slate-500 li_id">Tagihan ke</p>
           </div>
           <div class="">
             <p class="text-sm text-slate-500">Tenggat Pembayaran</p>
@@ -91,7 +90,8 @@
             <p class="text-sm text-slate-500"></p>
           </div>
         </div>
-        <% const paidInvoices = invoices.filter((invoice) => invoice.li_status === true); const billedInvoices = invoices.filter((invoice) => invoice.li_status === false); const allInvoice = billedInvoices.concat(paidInvoices); allInvoice.forEach(invoice => { const date = new Date(invoice.li_due_date).toLocaleDateString( locale, dateOptions ); const money = formatter.format(invoice.li_total_payment); %>
+        <% const paidInvoices = invoices.filter((invoice) => invoice.li_status === true); const billedInvoices = invoices.filter((invoice) => invoice.li_status === false); const allInvoice = billedInvoices.concat(paidInvoices); allInvoice.forEach(invoice => { const due_date = new Date(invoice.li_due_date).toLocaleDateString( locale, dateOptions ); const payment_date = new Date(invoice.li_payment_date).toLocaleDateString( locale, dateOptions ); const base_payment = formatter.format(invoice.li_base_payment); const penalty = formatter.format(invoice.li_penalty); const total_payment =
+        formatter.format(invoice.li_total_payment);%>
         <div class="grid grid-cols-5 gap-5 justify-between text-align-start">
           <div class="pl-4">
             <p class="text-xs text-slate-400 li_id"><%= invoice.li_id %></p>
@@ -109,10 +109,10 @@
           </div>
           <div class="flex gap-4 my-auto justify-end pr-4">
             <% if (invoice.li_status) { %>
-              <button data-li_id="<%= invoice.li_id %>" class="text-sm font-inter font-medium w-auto py-2 px-8 rounded-md outline outline-1 outline-slate-300 text-slate-500 disabled:opacity-50" disabled>Bayar</button>
-              <% } else { %>
-              <button data-li_id="<%= invoice.li_id %>" onclick="window.location.href='/invoice?id=<%= invoice.li_id %>'" class="text-sm font-inter font-medium w-auto py-2 px-8 rounded-md outline outline-1 outline-slate-300 text-slate-700 hover:bg-slate-50 focus:ring focus:ring-emerald-500">Bayar</button>
-              <% } %>
+            <button data-li_id="<%= invoice.li_id %>" class="text-sm font-inter font-medium w-auto py-2 px-8 rounded-md outline outline-1 outline-slate-300 text-slate-500 disabled:opacity-50" disabled>Bayar</button>
+            <% } else { %>
+            <button data-li_id="<%= invoice.li_id %>" onclick="window.location.href='/invoice?id=<%= invoice.li_id %>'" class="text-sm font-inter font-medium w-auto py-2 px-8 rounded-md outline outline-1 outline-slate-300 text-slate-700 hover:bg-slate-50 focus:ring focus:ring-emerald-500">Bayar</button>
+            <% } %>
 
             <button data-modal-target="<%= `modal-${invoice.li_id}` %>" data-modal-toggle="<%= `modal-${invoice.li_id}` %>" class="h-10 w-10 rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">
               <?xml version="1.0"?><svg class="fill-slate-400 p-1 hover:fill-slate-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -178,51 +178,47 @@
 
     <div id="small-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 w-full p-4 hidden overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
       <div class="relative w-full max-w-md max-h-full">
-          <!-- Modal content -->
-          <div class="relative bg-white rounded-lg shadow">
-              <div class="flex items-center justify-between p-6 rounded-t ">
-                  <h3 class="text-base font-medium text-slate-800 ">
-                      InvoiceID
-                  </h3>
-                  <button type="button" class="text-slate-500 bg-transparent hover:bg-slate-50 hover:text-slate-800 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center " data-modal-hide="small-modal">
-                      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                      <span class="sr-only">Close modal</span>
-                  </button>
-              </div>
-              <!-- Modal body -->
-              <div class="mx-6 mb-2">
-                <p class="text-base font-medium text-emerald-500 mb-2">Tagihan 1/6</p>
-                  <div class="grid grid-rows-2 gap-4 justify-items-start mb-6">
-                    <p class="text-3xl font-bold text-slate-800">Rp 1.035.800,00</p>
-                    <p class="text-sm font-semibold py-2 px-6 w-auto rounded-full text-center text-rose-400 bg-rose-50 ">Bayar sebelum {tenggat Pembayaran}</p>
-                  </div>
-                  <div class="grid grid-rows-5 gap-3 bg-slate-50 p-4 rounded-md mb-6">
-                    <p class="font-semibold text-slate-700">Rincian Tagihan</p>
-                    <div class="flex justify-between">
-                      <p class="text-sm text-slate-400 font-normal">Tagihan per Bulan</p>
-                      <p class="text-sm text-slate-800 font-medium">{Nominal Tagihan}</p>
-                    </div>
-                    <div class="flex justify-between">
-                      <p class="text-sm text-slate-400 font-normal">Penalti</p>
-                      <p class="text-sm text-slate-800 font-medium">{Nominal Penalti}</p>
-                    </div>
-                    <hr class="my-auto h-0.5 bg-slate-200">
-                    <div class="flex justify-between">
-                      <p class="text-slate-400 font-normal">Total</p>
-                      <p class="text-md text-slate-800 font-semibold">{Total Nominal}</p>
-                    </div>
-                  </div>
-                  <p class="text-xs text-slate-400">Lakukan pembayaran sebelum tenggat yang sudah ditetapkan, agar Anda tidak terkena denda</p>
-              </div>
-              <!-- Modal footer -->
-              <div class="flex items-center p-6 space-x-2 rounded-b ">
-                <button class="font-inter font-medium w-full py-2 px-8 rounded-md bg-emerald-500 text-white hover:bg-emerald-600">Bayar</button>
-              </div>
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow">
+          <div class="flex items-center justify-between p-6 rounded-t">
+            <h3 class="text-base font-medium text-slate-800">InvoiceID</h3>
+            <button type="button" class="text-slate-500 bg-transparent hover:bg-slate-50 hover:text-slate-800 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="small-modal">
+              <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              <span class="sr-only">Close modal</span>
+            </button>
           </div>
+          <!-- Modal body -->
+          <div class="mx-6 mb-2">
+            <p class="text-base font-medium text-emerald-500 mb-2">Tagihan 1/6</p>
+            <div class="grid grid-rows-2 gap-4 justify-items-start mb-6">
+              <p class="text-3xl font-bold text-slate-800">Rp 1.035.800,00</p>
+              <p class="text-sm font-semibold py-2 px-6 w-auto rounded-full text-center text-rose-400 bg-rose-50">Bayar sebelum {tenggat Pembayaran}</p>
+            </div>
+            <div class="grid grid-rows-5 gap-3 bg-slate-50 p-4 rounded-md mb-6">
+              <p class="font-semibold text-slate-700">Rincian Tagihan</p>
+              <div class="flex justify-between">
+                <p class="text-sm text-slate-400 font-normal">Tagihan per Bulan</p>
+                <p class="text-sm text-slate-800 font-medium">{Nominal Tagihan}</p>
+              </div>
+              <div class="flex justify-between">
+                <p class="text-sm text-slate-400 font-normal">Penalti</p>
+                <p class="text-sm text-slate-800 font-medium">{Nominal Penalti}</p>
+              </div>
+              <hr class="my-auto h-0.5 bg-slate-200" />
+              <div class="flex justify-between">
+                <p class="text-slate-400 font-normal">Total</p>
+                <p class="text-md text-slate-800 font-semibold">{Total Nominal}</p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-400">Lakukan pembayaran sebelum tenggat yang sudah ditetapkan, agar Anda tidak terkena denda</p>
+          </div>
+          <!-- Modal footer -->
+          <div class="flex items-center p-6 space-x-2 rounded-b">
+            <button class="font-inter font-medium w-full py-2 px-8 rounded-md bg-emerald-500 text-white hover:bg-emerald-600">Bayar</button>
+          </div>
+        </div>
       </div>
     </div>
-    
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
   </body>
