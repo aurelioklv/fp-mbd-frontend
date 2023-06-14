@@ -21,7 +21,7 @@
       };
     </script>
     <% const locale = "id-ID"; const dateOptions = { year: "numeric", month: "long", day: "numeric", }; const formatter = new Intl.NumberFormat(locale, { style: "currency", currency: "IDR", }); %>
-    <title>Riwayat Transaksi</title>
+    <title>Riwayat</title>
   </head>
   <body class="bg-slate-50 h-full font-inter">
     <div class="container bg-white p-8 text-left rounded-xl max-w-5xl space-y-8 shadow-sm mx-auto my-8">
@@ -104,8 +104,42 @@
             <% }) %>
           </div>
 
-          <div class="hidden p-4 rounded-lg bg-gray-50 " id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
-              <p class="text-sm text-gray-500">This is some placeholder content the <strong class="font-medium text-gray-800 ">Dashboard tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
+
+          <div class="hidden space-y-4 li_container" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+            <!-- <h2 class="font-semibold text-sm">Riwayat Transaksi</h2> -->
+            <div class="bg-slate-50 grid grid-cols-2 gap-5 justify-between text-align-start py-4 rounded-lg">
+
+              <div class="">
+                <p class="text-sm text-slate-500 li_id pl-4">Nominal Transaksi</p>
+              </div>
+
+              <div class="m-auto">
+                <p class="text-sm text-slate-500">Tanggal Transaksi</p>
+              </div>
+            </div>
+    
+            <!-- <% transactions.forEach(transaction => { const date = new Date(transaction.t_date).toLocaleDateString( locale, dateOptions ); const money = formatter.format(transaction.t_loan); const complete = transaction.t_payment_count === transaction.t_lt_period; %> -->
+            <div class="grid grid-cols-2 gap-5 justify-between text-align-start">
+              <div class="pl-4">
+                <p class="text-xs text-slate-400 li_id">ID Log</p>
+                <h2 class="text-md font-semibold text-emerald-500 li_total_payment">{Rp. Nominal}</h2>
+              </div>
+              <div class="m-auto">
+                <h2 class="text-sm font-medium text-slate-700 li_due_date">{date}</h2>
+              </div>
+            </div>
+            <hr />
+            <div class="grid grid-cols-2 gap-5 justify-between text-align-start">
+              <div class="pl-4">
+                <p class="text-xs text-slate-400 li_id">ID Log</p>
+                <h2 class="text-md font-semibold text-rose-400 li_total_payment">{Rp. Nominal}</h2>
+              </div>
+              <div class="m-auto">
+                <h2 class="text-sm font-medium text-slate-700 li_due_date">{date}</h2>
+              </div>
+            </div>
+            <hr />
+            <!-- <% }) %> -->
           </div>
       </div>
 
