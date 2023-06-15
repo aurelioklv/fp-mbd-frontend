@@ -104,7 +104,7 @@
             <h2 class="text-sm font-medium text-slate-700 li_due_date"><%= due_date %></h2>
           </div>
           <div class="m-auto">
-            <% if (invoice.li_penalty > 0 && !invoice.status) { %>
+            <% if (invoice.li_penalty > 0 && !invoice.li_status) { %>
             <h2 class="text-xs font-semibold py-2 px-4 w-auto rounded-full text-center text-rose-600 bg-rose-50">Telat</h2>
             <% } else { %>
             <h2 class="text-xs font-semibold py-2 px-4 w-auto rounded-full text-center <%= invoice.li_status ? 'text-green-600 bg-green-50' : 'text-orange-500 bg-orange-50'%>"><%= invoice.li_status ? "Sudah dibayar" : "Belum dibayar" %></h2>
