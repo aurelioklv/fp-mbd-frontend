@@ -104,7 +104,7 @@
             <h2 class="text-sm font-medium text-slate-700 li_due_date"><%= due_date %></h2>
           </div>
           <div class="m-auto">
-            <h2 class="text-xs font-semibold py-2 px-4 w-auto rounded-full text-center <%= invoice.li_status ? 'text-green-600 bg-green-50' : 'text-rose-500 bg-rose-50'%>"><%= invoice.li_status ? "Sudah dibayar" : "Belum dibayar" %></h2>
+            <h2 class="text-xs font-semibold py-2 px-4 w-auto rounded-full text-center <%= invoice.li_status ? 'text-green-600 bg-green-50' : 'text-orange-500 bg-orange-50'%>"><%= invoice.li_status ? "Sudah dibayar" : "Belum dibayar" %></h2>
           </div>
           <div class="flex gap-4 my-auto justify-end pr-4">
             <% if (invoice.li_status) { %>
