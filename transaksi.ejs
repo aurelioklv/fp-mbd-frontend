@@ -26,8 +26,8 @@
   <body class="bg-slate-50 h-full font-inter">
     <div class="container bg-white p-8 text-left rounded-xl max-w-5xl space-y-8 shadow-sm mx-auto my-8">
       <div class="flex gap-2 content-center justify-between">
-        <!-- <h1 class="font-bold text-slate-900 text-2xl" id="acc_name"><%= user.acc_name %></h1> -->
         <h1 class="font-bold text-slate-900 text-2xl">Riwayat</h1>
+        <h1 class="font-bold text-slate-900 text-2xl"><%= data.t_id %></h1>
         <a href="/home">
           <button class="block my-auto outline outline-1 outline-slate-300 h-8 w-8 rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">
             <?xml version="1.0"?><svg class="fill-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -42,105 +42,110 @@
         </a>
       </div>
 
-      
-
       <div class="mb-2 border-b border-gray-200">
         <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="myTab" data-tabs-toggle="#myTabContent" role="tablist">
-            <li class="mr-2" role="presentation">
-                <button class="inline-block p-4 border-b-2 rounded-t-lg aria-selected:text-emerald-500 aria-selected:border-emerald-400 aria-selected:hover:text-emerald-500" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Peminjaman</button>
-            </li>
-            <li class="mr-2" role="presentation">
-                <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg aria-selected:text-emerald-500 aria-selected:border-emerald-400 aria-selected:hover:text-emerald-500" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Transaksi</button>
-            </li>
+          <li class="mr-2" role="presentation">
+            <button class="inline-block p-4 border-b-2 rounded-t-lg aria-selected:text-emerald-500 aria-selected:border-emerald-400 aria-selected:hover:text-emerald-500" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Peminjaman</button>
+          </li>
+          <li class="mr-2" role="presentation">
+            <button class="inline-block p-4 border-b-2 border-transparent rounded-t-lg aria-selected:text-emerald-500 aria-selected:border-emerald-400 aria-selected:hover:text-emerald-500" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Transaksi</button>
+          </li>
         </ul>
       </div>
 
       <div id="myTabContent">
-          <!-- <div class="hidden p-4 rounded-lg bg-gray-50 " id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <!-- <div class="hidden p-4 rounded-lg bg-gray-50 " id="profile" role="tabpanel" aria-labelledby="profile-tab">
               <p class="text-sm text-gray-500">This is some placeholder content the <strong class="font-medium text-gray-800 ">Profile tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
           </div> -->
-          <div class="hidden space-y-4 li_container" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <!-- <h2 class="font-semibold text-sm">Riwayat Transaksi</h2> -->
-            <div class="bg-slate-50 grid grid-cols-5 gap-5 justify-between text-align-start py-4 rounded-lg">
-              <div class="">
-                <p class="text-sm text-slate-500 li_id pl-4">Nominal Pinjaman</p>
-              </div>
-              <div class="m-auto">
-                <p class=" text-sm text-slate-500 li_id">Periode</p>
-              </div>
-              <div class="">
-                <p class="text-sm text-slate-500">Tanggal Peminjaman</p>
-              </div>
-              <div class="m-auto">
-                <p class="text-sm text-slate-500">Status</p>
-              </div>
-              <div class="m-auto px-4">
-                <p class="text-sm text-slate-500"></p>
-              </div>
+        <div class="hidden space-y-4 li_container" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <!-- <h2 class="font-semibold text-sm">Riwayat Transaksi</h2> -->
+          <div class="bg-slate-50 grid grid-cols-5 gap-5 justify-between text-align-start py-4 rounded-lg">
+            <div class="">
+              <p class="text-sm text-slate-500 li_id pl-4">Nominal Pinjaman</p>
             </div>
-    
-            <% transactions.forEach(transaction => { const date = new Date(transaction.t_date).toLocaleDateString( locale, dateOptions ); const money = formatter.format(transaction.t_loan); const complete = transaction.t_payment_count === transaction.t_lt_period; %>
-            <div class="grid grid-cols-5 gap-5 justify-between text-align-start">
-              <div class="pl-4">
-                <p class="text-xs text-slate-400 li_id"><%= transaction.t_id %></p>
-                <h2 class="text-md font-semibold text-slate-700 li_total_payment"><%= money %></h2>
-              </div>
-              <div class="m-auto">
-                <h2 class="text-sm font-medium text-slate-700 li_due_date">3 Bulan</h2>
-              </div>
-              <div class="my-auto">
-                <h2 class="text-sm font-medium text-slate-700 li_due_date"><%= date %></h2>
-              </div>
-              <div class="m-auto">
-                <h2 class="text-xs font-semibold py-2 px-4 w-auto rounded-full text-center <%= complete ? 'text-green-600 bg-green-50' : 'text-rose-400 bg-rose-50'%>"><%= complete ? "Sudah Lunas" : "Belum Lunas" %></h2>
-              </div>
-              <div class="my-auto text-right pr-4">
-                <button data-modal-target="small-modal" data-modal-toggle="small-modal" class=" h-10 w-10 rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">
-                  <?xml version="1.0"?><svg class="fill-slate-400 p-1 hover:fill-slate-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="info"><rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path><circle cx="12" cy="8" r="1"></circle><path d="M12 10a1 1 0 0 0-1 1v5a1 1 0 0 0 2 0v-5a1 1 0 0 0-1-1z"></path></g></g></svg>
-                </button>
-              </div>
+            <div class="m-auto">
+              <p class="text-sm text-slate-500 li_id">Periode</p>
             </div>
-            <hr />
-            <% }) %>
+            <div class="">
+              <p class="text-sm text-slate-500">Tanggal Peminjaman</p>
+            </div>
+            <div class="m-auto">
+              <p class="text-sm text-slate-500">Status</p>
+            </div>
+            <div class="m-auto px-4">
+              <p class="text-sm text-slate-500"></p>
+            </div>
           </div>
 
-
-          <div class="hidden space-y-4 li_container" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
-            <!-- <h2 class="font-semibold text-sm">Riwayat Transaksi</h2> -->
-            <div class="bg-slate-50 grid grid-cols-2 gap-5 justify-between text-align-start py-4 rounded-lg">
-
-              <div class="">
-                <p class="text-sm text-slate-500 li_id pl-4">Nominal Transaksi</p>
-              </div>
-
-              <div class="m-auto">
-                <p class="text-sm text-slate-500">Tanggal Transaksi</p>
-              </div>
+          <% transactions.forEach(transaction => { const date = new Date(transaction.t_date).toLocaleDateString( locale, dateOptions ); const money = formatter.format(transaction.t_loan); const complete = transaction.t_payment_count === transaction.t_lt_period; %>
+          <div class="grid grid-cols-5 gap-5 justify-between text-align-start">
+            <div class="pl-4">
+              <p class="text-xs text-slate-400 li_id"><%= transaction.t_id %></p>
+              <h2 class="text-md font-semibold text-slate-700 li_total_payment"><%= money %></h2>
             </div>
-    
-            <!-- <% transactions.forEach(transaction => { const date = new Date(transaction.t_date).toLocaleDateString( locale, dateOptions ); const money = formatter.format(transaction.t_loan); const complete = transaction.t_payment_count === transaction.t_lt_period; %> -->
-            <div class="grid grid-cols-2 gap-5 justify-between text-align-start">
-              <div class="pl-4">
-                <p class="text-xs text-slate-400 li_id">ID Log</p>
-                <h2 class="text-md font-semibold text-emerald-500 li_total_payment">{Rp. Nominal}</h2>
-              </div>
-              <div class="m-auto">
-                <h2 class="text-sm font-medium text-slate-700 li_due_date">{date}</h2>
-              </div>
+            <div class="m-auto">
+              <h2 class="text-sm font-medium text-slate-700 li_due_date">3 Bulan</h2>
             </div>
-            <hr />
-            <div class="grid grid-cols-2 gap-5 justify-between text-align-start">
-              <div class="pl-4">
-                <p class="text-xs text-slate-400 li_id">ID Log</p>
-                <h2 class="text-md font-semibold text-rose-400 li_total_payment">{Rp. Nominal}</h2>
-              </div>
-              <div class="m-auto">
-                <h2 class="text-sm font-medium text-slate-700 li_due_date">{date}</h2>
-              </div>
+            <div class="my-auto">
+              <h2 class="text-sm font-medium text-slate-700 li_due_date"><%= date %></h2>
             </div>
-            <hr />
-            <!-- <% }) %> -->
+            <div class="m-auto">
+              <h2 class="text-xs font-semibold py-2 px-4 w-auto rounded-full text-center <%= complete ? 'text-green-600 bg-green-50' : 'text-rose-400 bg-rose-50'%>"><%= complete ? "Sudah Lunas" : "Belum Lunas" %></h2>
+            </div>
+            <div class="my-auto text-right pr-4">
+              <button data-modal-target="small-modal" data-modal-toggle="small-modal" class="h-10 w-10 rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">
+                <?xml version="1.0"?><svg class="fill-slate-400 p-1 hover:fill-slate-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <g data-name="Layer 2">
+                    <g data-name="info">
+                      <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                      <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path>
+                      <circle cx="12" cy="8" r="1"></circle>
+                      <path d="M12 10a1 1 0 0 0-1 1v5a1 1 0 0 0 2 0v-5a1 1 0 0 0-1-1z"></path>
+                    </g>
+                  </g>
+                </svg>
+              </button>
+            </div>
           </div>
+          <hr />
+          <% }) %>
+        </div>
+
+        <div class="hidden space-y-4 li_container" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+          <!-- <h2 class="font-semibold text-sm">Riwayat Transaksi</h2> -->
+          <div class="bg-slate-50 grid grid-cols-2 gap-5 justify-between text-align-start py-4 rounded-lg">
+            <div class="">
+              <p class="text-sm text-slate-500 li_id pl-4">Nominal Transaksi</p>
+            </div>
+
+            <div class="m-auto">
+              <p class="text-sm text-slate-500">Tanggal Transaksi</p>
+            </div>
+          </div>
+
+          <!-- <% transactions.forEach(transaction => { const date = new Date(transaction.t_date).toLocaleDateString( locale, dateOptions ); const money = formatter.format(transaction.t_loan); const complete = transaction.t_payment_count === transaction.t_lt_period; %> -->
+          <div class="grid grid-cols-2 gap-5 justify-between text-align-start">
+            <div class="pl-4">
+              <p class="text-xs text-slate-400 li_id">ID Log</p>
+              <h2 class="text-md font-semibold text-emerald-500 li_total_payment">{Rp. Nominal}</h2>
+            </div>
+            <div class="m-auto">
+              <h2 class="text-sm font-medium text-slate-700 li_due_date">{date}</h2>
+            </div>
+          </div>
+          <hr />
+          <div class="grid grid-cols-2 gap-5 justify-between text-align-start">
+            <div class="pl-4">
+              <p class="text-xs text-slate-400 li_id">ID Log</p>
+              <h2 class="text-md font-semibold text-rose-400 li_total_payment">{Rp. Nominal}</h2>
+            </div>
+            <div class="m-auto">
+              <h2 class="text-sm font-medium text-slate-700 li_due_date">{date}</h2>
+            </div>
+          </div>
+          <hr />
+          <!-- <% }) %> -->
+        </div>
       </div>
 
       <!-- <div class="outline outline-1 outline-slate-200 p-4 w-full rounded-md space-y-1">
@@ -152,75 +157,70 @@
           </div>
         </div>
       </div> -->
-
-      
     </div>
 
     <div id="small-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 w-full p-4 hidden overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
       <div class="relative w-full max-w-md max-h-full">
-          <!-- Modal content -->
-          <div class="relative bg-white rounded-lg shadow">
-              <div class="flex items-center justify-between p-6 rounded-t ">
-                  <h3 class="text-base font-medium text-slate-800 ">
-                      {ID Transkasi}
-                  </h3>
-                  <button type="button" class="text-slate-500 bg-transparent hover:bg-slate-50 hover:text-slate-800 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center " data-modal-hide="small-modal">
-                      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                      <span class="sr-only">Close modal</span>
-                  </button>
-              </div>
-              <!-- Modal body -->
-              <div class="mx-6 mb-2">
-                <p class="text-sm font-normal text-slate-400 mb-2">Tanggal {tanggal transaksi}</p>
-                  <div class="grid grid-rows-2 gap-4 justify-items-start mb-6">
-                    <p class="text-3xl font-bold text-slate-800">Rp 1.035.800,00</p>
-                    <p class="text-sm font-semibold py-2 px-6 w-auto rounded-full text-center text-sky-400 bg-sky-50 ">Periode {periode}</p>
-                  </div>
-                  <p class="font-semibold text-slate-700 mb-4">Tagihan</p>
-                  <div class=" bg-slate-50 p-4 rounded-md mb-3">
-                    <div class="flex justify-between">
-                      <div class="grid grid-rows-2">
-                        <p class="text-sm text-slate-400 font-normal">T0004INV02</p>
-                        <p class="text-md text-slate-800 font-medium">Rp 1.035.800,00</p>
-                      </div>
-                      <div class="my-auto text-right">
-                        <h2 class="text-xs font-semibold py-2 px-4 w-auto rounded-full text-center text-rose-400 bg-rose-50">Belum dibayar</h2>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class=" bg-slate-50 p-4 rounded-md mb-3">
-                    <div class="flex justify-between">
-                      <div class="grid grid-rows-2">
-                        <p class="text-sm text-slate-400 font-normal">T0004INV02</p>
-                        <p class="text-md text-slate-800 font-medium">Rp 1.035.800,00</p>
-                      </div>
-                      <div class="my-auto text-right">
-                        <h2 class="text-xs font-semibold py-2 px-4 w-auto rounded-full text-center text-rose-400 bg-rose-50">Belum dibayar</h2>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class=" bg-slate-50 p-4 rounded-md mb-3">
-                    <div class="flex justify-between">
-                      <div class="grid grid-rows-2">
-                        <p class="text-sm text-slate-400 font-normal">T0004INV02</p>
-                        <p class="text-md text-slate-800 font-medium">Rp 1.035.800,00</p>
-                      </div>
-                      <div class="my-auto text-right">
-                        <h2 class="text-xs font-semibold py-2 px-4 w-auto rounded-full text-center text-rose-400 bg-rose-50">Belum dibayar</h2>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  
-                  <p class="text-xs text-slate-400">Lakukan pembayaran sebelum tenggat yang sudah ditetapkan, agar Anda tidak terkena denda</p>
-              </div>
-              <!-- Modal footer -->
-              <div class="flex items-center p-6 space-x-2 rounded-b ">
-                <!-- <button class="font-inter font-medium w-full py-2 px-8 rounded-md bg-emerald-500 text-white hover:bg-emerald-600">Bayar</button> -->
-              </div>
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow">
+          <div class="flex items-center justify-between p-6 rounded-t">
+            <h3 class="text-base font-medium text-slate-800">{ID Transkasi}</h3>
+            <button type="button" class="text-slate-500 bg-transparent hover:bg-slate-50 hover:text-slate-800 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="small-modal">
+              <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              <span class="sr-only">Close modal</span>
+            </button>
           </div>
+          <!-- Modal body -->
+          <div class="mx-6 mb-2">
+            <p class="text-sm font-normal text-slate-400 mb-2">Tanggal {tanggal transaksi}</p>
+            <div class="grid grid-rows-2 gap-4 justify-items-start mb-6">
+              <p class="text-3xl font-bold text-slate-800">Rp 1.035.800,00</p>
+              <p class="text-sm font-semibold py-2 px-6 w-auto rounded-full text-center text-sky-400 bg-sky-50">Periode {periode}</p>
+            </div>
+            <p class="font-semibold text-slate-700 mb-4">Tagihan</p>
+            <div class="bg-slate-50 p-4 rounded-md mb-3">
+              <div class="flex justify-between">
+                <div class="grid grid-rows-2">
+                  <p class="text-sm text-slate-400 font-normal">T0004INV02</p>
+                  <p class="text-md text-slate-800 font-medium">Rp 1.035.800,00</p>
+                </div>
+                <div class="my-auto text-right">
+                  <h2 class="text-xs font-semibold py-2 px-4 w-auto rounded-full text-center text-rose-400 bg-rose-50">Belum dibayar</h2>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-md mb-3">
+              <div class="flex justify-between">
+                <div class="grid grid-rows-2">
+                  <p class="text-sm text-slate-400 font-normal">T0004INV02</p>
+                  <p class="text-md text-slate-800 font-medium">Rp 1.035.800,00</p>
+                </div>
+                <div class="my-auto text-right">
+                  <h2 class="text-xs font-semibold py-2 px-4 w-auto rounded-full text-center text-rose-400 bg-rose-50">Belum dibayar</h2>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-slate-50 p-4 rounded-md mb-3">
+              <div class="flex justify-between">
+                <div class="grid grid-rows-2">
+                  <p class="text-sm text-slate-400 font-normal">T0004INV02</p>
+                  <p class="text-md text-slate-800 font-medium">Rp 1.035.800,00</p>
+                </div>
+                <div class="my-auto text-right">
+                  <h2 class="text-xs font-semibold py-2 px-4 w-auto rounded-full text-center text-rose-400 bg-rose-50">Belum dibayar</h2>
+                </div>
+              </div>
+            </div>
+
+            <p class="text-xs text-slate-400">Lakukan pembayaran sebelum tenggat yang sudah ditetapkan, agar Anda tidak terkena denda</p>
+          </div>
+          <!-- Modal footer -->
+          <div class="flex items-center p-6 space-x-2 rounded-b">
+            <!-- <button class="font-inter font-medium w-full py-2 px-8 rounded-md bg-emerald-500 text-white hover:bg-emerald-600">Bayar</button> -->
+          </div>
+        </div>
       </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
