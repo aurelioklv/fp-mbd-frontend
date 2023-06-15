@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              inter: ["Inter"],
+            },
+          },
+        },
+      };
+    </script>
+    <% const locale = "id-ID"; const dateOptions = { year: "numeric", month: "long", day: "numeric", }; const formatter = new Intl.NumberFormat(locale, { style: "currency", currency: "IDR", }); %>
+    <title>Admin</title>
+  </head>
+  <body class="bg-slate-50 h-full font-inter">
+    <div class="grid grid-cols-3 max-w-5xl gap-5 mx-auto my-8 h-auto">
+      <div class="bg-white shadow-sm p-6 rounded-lg space-y-2">
+        <p class="text-sm text-slate-400">Total Pengguna</p>
+        <p class="font-semibold text-2xl text-sky-500">25 Pengguna</p>
+      </div>
+
+      <div class="bg-white shadow-sm p-6 rounded-lg space-y-2">
+        <p class="text-sm text-slate-400">Total Pembayaran Telat</p>
+        <p class="font-semibold text-2xl text-rose-400">41 Telat</p>
+      </div>
+
+      <div class="bg-white shadow-sm p-6 rounded-lg space-y-2">
+        <p class="text-sm text-slate-400">Periode yang sering dipilih</p>
+        <p class="font-semibold text-2xl text-indigo-400">3 Bulan</p>
+      </div>
+
+      <div class="bg-white shadow-sm p-6 rounded-lg space-y-2">
+        <p class="text-sm text-slate-400">Rata-rata gaji pengguna</p>
+        <p class="font-semibold text-2xl text-amber-500">Rp 7.000.000,00</p>
+      </div>
+
+      <div class="bg-white shadow-sm p-6 rounded-lg space-y-2">
+        <p class="text-sm text-slate-400">Rata-rata peminjaman per bulan</p>
+        <p class="font-semibold text-2xl text-lime-500">Rp 3.950.000,00</p>
+      </div>
+
+      <div class="bg-white shadow-sm p-6 rounded-lg space-y-2">
+        <p class="text-sm text-slate-400">Total Peminjaman</p>
+        <p class="font-semibold text-2xl text-emerald-500">Rp 125.673.000,00</p>
+      </div>
+    </div>
+
+    <div class="container bg-white p-8 text-left rounded-xl max-w-5xl space-y-8 shadow-sm mx-auto my-8">
+      <h1 class="font-semibold text-slate-800 text-xl">Pengguna Bermasalah</h1>
+
+      <!-- //baruuuu -->
+
+      <div class="space-y-4">
+        <div class="bg-slate-50 grid grid-cols-4 gap-5 justify-between text-align-start py-4 rounded-lg">
+          <div class="">
+            <p class="text-sm text-slate-500 li_id pl-4">Nama Pengguna</p>
+          </div>
+
+          <div class="m-auto">
+            <p class="text-sm text-slate-500">No. Telepon</p>
+          </div>
+
+          <div class="m-auto">
+            <p class="text-sm text-slate-500">Transaksi Telat</p>
+          </div>
+
+          <div class="m-auto px-4">
+            <p class="text-sm text-slate-500"></p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-4 gap-5 justify-between text-align-start">
+          <div class="pl-4">
+            <p class="text-xs text-slate-400 li_id mb-1 tracking-wider">3517091601030001</p>
+            <h2 class="text-md font-medium text-slate-700 li_total_payment">Hanafi Satriyo Utomo Setiawan</h2>
+          </div>
+          <div class="m-auto">
+            <h2 class="text-sm font-medium text-slate-700 li_due_date">081353033922</h2>
+          </div>
+          <div class="m-auto">
+            <h2 class="text-sm font-medium text-slate-700 li_due_date">T0001</h2>
+          </div>
+          <div class="my-auto text-right pr-4">
+            <button data-modal-target="small-modal" data-modal-toggle="small-modal" class="h-10 w-10 rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">
+              <?xml version="1.0"?><svg class="fill-slate-400 p-1 hover:fill-slate-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <g data-name="Layer 2">
+                  <g data-name="info">
+                    <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                    <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path>
+                    <circle cx="12" cy="8" r="1"></circle>
+                    <path d="M12 10a1 1 0 0 0-1 1v5a1 1 0 0 0 2 0v-5a1 1 0 0 0-1-1z"></path>
+                  </g>
+                </g>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <hr />
+      </div>
+    </div>
+
+    <div id="small-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 w-full p-4 hidden overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div class="relative w-full max-w-md max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow">
+          <div class="flex items-center justify-between p-6 rounded-t">
+            <h3 class="text-base font-medium text-slate-800">Detail Pengguna</h3>
+            <button type="button" class="text-slate-500 bg-transparent hover:bg-slate-50 hover:text-slate-800 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="small-modal">
+              <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+          <!-- Modal body -->
+          <div class="mx-6 mb-2">
+            <p class="text-sm font-medium text-emerald-500 mb-1">3517091601030001</p>
+            <p class="text-xl font-semibold text-slate-800 mb-1">Hanafi Satriyo Utomo Setiawan</p>
+            <p class="text-sm font-norma text-slate-400 mb-8">Jl. Adityawarman No.81 Jombang</p>
+
+            <div class="grid grid-rows-2 mb-8 gap-3">
+              <button onclick="window.location.href='#'" class="text-sm px-4 py-2 text-center font-medium text-white inline-flex flex justify-center rounded-md p-1 bg-emerald-500 hover:bg-emerald-600">
+                <?xml version="1.0"?><svg class="fill-white w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <g data-name="Layer 2">
+                    <g data-name="phone">
+                      <rect width="24" height="24" opacity="0"></rect>
+                      <path d="M17.4 22A15.42 15.42 0 0 1 2 6.6 4.6 4.6 0 0 1 6.6 2a3.94 3.94 0 0 1 .77.07 3.79 3.79 0 0 1 .72.18 1 1 0 0 1 .65.75l1.37 6a1 1 0 0 1-.26.92c-.13.14-.14.15-1.37.79a9.91 9.91 0 0 0 4.87 4.89c.65-1.24.66-1.25.8-1.38a1 1 0 0 1 .92-.26l6 1.37a1 1 0 0 1 .72.65 4.34 4.34 0 0 1 .19.73 4.77 4.77 0 0 1 .06.76A4.6 4.6 0 0 1 17.4 22zM6.6 4A2.61 2.61 0 0 0 4 6.6 13.41 13.41 0 0 0 17.4 20a2.61 2.61 0 0 0 2.6-2.6v-.33L15.36 16l-.29.55c-.45.87-.78 1.5-1.62 1.16a11.85 11.85 0 0 1-7.18-7.21c-.36-.78.32-1.14 1.18-1.59L8 8.64 6.93 4z"></path>
+                    </g>
+                  </g>
+                </svg>
+
+                Kontak Pengguna
+              </button>
+
+              <button onclick="window.location.href='#'" class="text-sm px-4 py-2 text-center font-medium text-slate-700 inline-flex flex justify-center outline outline-1 outline-slate-300 rounded-md p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">
+                <?xml version="1.0"?><svg class="fill-slate-700 w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <g data-name="Layer 2">
+                    <g data-name="phone">
+                      <rect width="24" height="24" opacity="0"></rect>
+                      <path d="M17.4 22A15.42 15.42 0 0 1 2 6.6 4.6 4.6 0 0 1 6.6 2a3.94 3.94 0 0 1 .77.07 3.79 3.79 0 0 1 .72.18 1 1 0 0 1 .65.75l1.37 6a1 1 0 0 1-.26.92c-.13.14-.14.15-1.37.79a9.91 9.91 0 0 0 4.87 4.89c.65-1.24.66-1.25.8-1.38a1 1 0 0 1 .92-.26l6 1.37a1 1 0 0 1 .72.65 4.34 4.34 0 0 1 .19.73 4.77 4.77 0 0 1 .06.76A4.6 4.6 0 0 1 17.4 22zM6.6 4A2.61 2.61 0 0 0 4 6.6 13.41 13.41 0 0 0 17.4 20a2.61 2.61 0 0 0 2.6-2.6v-.33L15.36 16l-.29.55c-.45.87-.78 1.5-1.62 1.16a11.85 11.85 0 0 1-7.18-7.21c-.36-.78.32-1.14 1.18-1.59L8 8.64 6.93 4z"></path>
+                    </g>
+                  </g>
+                </svg>
+
+                Kontak Darurat (Istri)
+              </button>
+            </div>
+
+            <p class="font-semibold text-slate-700 mb-4">Tagihan Telat</p>
+
+            <!-- List Tagihan Telat -->
+
+            <div class="border border-slate-200 p-4 rounded-md mb-3">
+              <div class="flex justify-between">
+                <div class="grid grid-rows-2">
+                  <p class="text-sm text-slate-400 font-normal">T0004INV02</p>
+                  <p class="text-md text-slate-800 font-medium">Rp 1.035.800,00</p>
+                </div>
+                <div class="my-auto text-right">
+                  <p class="textbase text-slate-400 font-normal">1/3</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal footer -->
+          <div class="flex items-center p-6 space-x-2 rounded-b">
+            <!-- <button class="font-inter font-medium w-full py-2 px-8 rounded-md bg-emerald-500 text-white hover:bg-emerald-600">Bayar</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+  </body>
+</html>
