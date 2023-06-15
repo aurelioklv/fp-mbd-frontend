@@ -179,7 +179,7 @@
           <% 
           const log_invoice = invoices.filter(invoice=>invoice.li_status===true);
           const logs = transactions.concat(log_invoice); 
-          logs.sort((a,b)=>a.log_date-b.log_date);
+          logs.sort((a,b)=>b.log_date-a.log_date);
           %>
 
           <% logs.forEach(log => { %>
