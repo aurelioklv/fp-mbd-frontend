@@ -176,26 +176,30 @@
             </div>
           </div>
 
-          <div class="grid grid-cols-2 gap-5 justify-between text-align-start">
-            <div class="pl-4">
-              <p class="text-xs text-slate-400 li_id">ID Log</p>
-              <h2 class="text-md font-semibold text-emerald-500 li_total_payment">{Rp. Nominal}</h2>
+          <% 
+          const log_invoice = invoices.filter(invoice=>invoice.li_status===true);
+          const logs = transactions.concat(log_invoice); 
+          logs.sort((a,b)=>a.log_date-b.log_date);
+          %>
+
+          <% logs.forEach(log => { %>
+            <% const log_date = new Date(log.log_date).toLocaleDateString( locale, dateOptions ); %>
+            <div class="grid grid-cols-2 gap-5 justify-between text-align-start">
+              <div class="pl-4">
+                <p class="text-xs text-slate-400 li_id"><%= log.log_id %></p>
+                <% if (log.li_status) { %>
+                <h2 class="text-md font-semibold text-emerald-500 li_total_payment">+<%= formatter.format(log.log_money) %></h2>
+                <% } else { %>
+                <h2 class="text-md font-semibold text-red-500 li_total_payment">-<%= formatter.format(log.log_money) %></h2>
+                <% } %>
+              </div>
+              <div class="m-auto">
+                <h2 class="text-sm font-medium text-slate-700 li_due_date"><%= log_date %></h2>
+              </div>
             </div>
-            <div class="m-auto">
-              <h2 class="text-sm font-medium text-slate-700 li_due_date">{date}</h2>
-            </div>
-          </div>
-          <hr />
-          <div class="grid grid-cols-2 gap-5 justify-between text-align-start">
-            <div class="pl-4">
-              <p class="text-xs text-slate-400 li_id">ID Log</p>
-              <h2 class="text-md font-semibold text-rose-400 li_total_payment">{Rp. Nominal}</h2>
-            </div>
-            <div class="m-auto">
-              <h2 class="text-sm font-medium text-slate-700 li_due_date">{date}</h2>
-            </div>
-          </div>
-          <hr />
+            <hr />
+          <% }) %>
+          
         </div>
       </div>
       <!-- TAB END -->
