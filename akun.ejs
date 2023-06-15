@@ -28,7 +28,17 @@
       <div class="flex gap-2 content-center justify-between">
         <div class="space-y-1">
           <p class="text-sm tracking-widest text-slate-400 font-normal" id="acc_ktp_num"><%= user.acc_ktp_num %></p>
-          <p class="text-2xl text-slate-700 font-bold" id="acc_name"><%= user.acc_name %></p>
+          <div class="flex gap-4 items-center">
+            <p class="text-2xl text-slate-700 font-bold" id="acc_name"><%= user.acc_name %></p>
+
+            <div class="flex gap-1 items-center bg-orange-50 py-2 px-4 rounded-full">
+              <?xml version="1.0"?><svg class="fill-orange-400 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="star"><rect width="12" height="12" transform="rotate(90 12 12)" opacity="0"></rect><path d="M17.56 21a1 1 0 0 1-.46-.11L12 18.22l-5.1 2.67a1 1 0 0 1-1.45-1.06l1-5.63-4.12-4a1 1 0 0 1-.25-1 1 1 0 0 1 .81-.68l5.7-.83 2.51-5.13a1 1 0 0 1 1.8 0l2.54 5.12 5.7.83a1 1 0 0 1 .81.68 1 1 0 0 1-.25 1l-4.12 4 1 5.63a1 1 0 0 1-.4 1 1 1 0 0 1-.62.18z"></path></g></g></svg>
+              <p class="text-sm text-orange-400 font-semibold" ><%= user.acc_rating %></p>
+
+            </div>
+
+            
+          </div>
           <p class="text-base text-emerald-500 font-semibold" id="acc_email"><%= user.acc_email %></p>
         </div>
         <div class="flex gap-3 justify-items-end">
