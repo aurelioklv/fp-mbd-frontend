@@ -24,7 +24,7 @@
     <title>Aplikasi Pinjol Terpercaya</title>
   </head>
   <body class="bg-slate-50 h-full font-inter">
-    <div class="container bg-white p-8 text-left rounded-xl max-w-5xl space-y-8 shadow-sm mx-auto my-8">
+    <div class="container bg-white p-8 text-left rounded-xl max-w-6xl space-y-8 shadow-sm mx-auto my-8">
       <div class="flex gap-2 content-center justify-between">
         <h1 class="font-bold text-slate-900 text-2xl" id="acc_name">Halo, <%= user.acc_name %></h1>
         <div class="grid grid-cols-1 gap-2">
@@ -103,11 +103,14 @@
           <div class="my-auto">
             <h2 class="text-sm font-medium text-slate-700 li_due_date"><%= due_date %></h2>
           </div>
-          <div class="m-auto">
-            <% if (invoice.li_penalty > 0 && !invoice.li_status) { %>
-            <h2 class="text-xs font-semibold py-2 px-4 w-auto rounded-full text-center text-rose-600 bg-rose-50">Telat</h2>
+          <div class="flex gap-2 m-auto">
+            <% if (invoice.li_penalty > 0) { %>
+              <h2 class="text-xs font-semibold py-2 px-4 w-auto rounded-full text-center text-rose-400 bg-rose-50">Telat</h2>
+            <% } %>
+            <% if (!invoice.li_status) { %>
+            <h2 class="text-xs font-semibold py-2 px-4 w-auto rounded-full text-center text-orange-400 bg-orange-50">Belum dibayar</h2>
             <% } else { %>
-            <h2 class="text-xs font-semibold py-2 px-4 w-auto rounded-full text-center <%= invoice.li_status ? 'text-green-600 bg-green-50' : 'text-orange-500 bg-orange-50'%>"><%= invoice.li_status ? "Sudah dibayar" : "Belum dibayar" %></h2>
+            <h2 class="text-xs font-semibold py-2 px-4 w-auto rounded-full text-center text-green-600 bg-green-50">Sudah dibayar</h2>
             <% } %>
           </div>
           <div class="flex gap-4 my-auto justify-end pr-4">
