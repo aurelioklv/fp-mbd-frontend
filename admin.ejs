@@ -62,7 +62,7 @@
       <!-- //baruuuu -->
 
       <div class="space-y-4">
-        <div class="bg-slate-50 grid grid-cols-4 gap-5 justify-between text-align-start py-4 rounded-lg">
+        <div class="bg-slate-50 grid grid-cols-3 gap-5 justify-between text-align-start py-4 rounded-lg">
           <div class="">
             <p class="text-sm text-slate-500 li_id pl-4">Nama Pengguna</p>
           </div>
@@ -71,15 +71,12 @@
             <p class="text-sm text-slate-500">No. Telepon</p>
           </div>
 
-          <div class="m-auto">
-            <p class="text-sm text-slate-500">Transaksi Telat</p>
-          </div>
-
           <div class="m-auto px-4">
             <p class="text-sm text-slate-500"></p>
           </div>
         </div>
 
+<<<<<<< HEAD
         <% penalty_account.forEach(account => { %>
           <% const penalty_invoices = problem_loaner.filter(loaner=>loaner.acc_ktp_num===account.acc_ktp_num)%>
           <div class="grid grid-cols-4 gap-5 justify-between text-align-start">
@@ -96,6 +93,56 @@
             <div class="my-auto text-right pr-4">
               <button data-modal-target="<%= `modal-${account.acc_ktp_num}` %>" data-modal-toggle="<%= `modal-${account.acc_ktp_num}` %>" class="h-10 w-10 rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">
                 <?xml version="1.0"?><svg class="fill-slate-400 p-1 hover:fill-slate-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+=======
+        <div class="grid grid-cols-3 gap-5 justify-between text-align-start">
+          <div class="pl-4">
+            <p class="text-xs text-slate-400 li_id mb-1 tracking-wider">3517091601030001</p>
+            <h2 class="text-md font-medium text-slate-700 li_total_payment">Hanafi Satriyo Utomo Setiawan</h2>
+          </div>
+          <div class="m-auto">
+            <h2 class="text-sm font-medium text-slate-700 li_due_date">081353033922</h2>
+          </div>
+          <div class="my-auto text-right pr-4">
+            <button data-modal-target="small-modal" data-modal-toggle="small-modal" class="h-10 w-10 rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">
+              <?xml version="1.0"?><svg class="fill-slate-400 p-1 hover:fill-slate-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <g data-name="Layer 2">
+                  <g data-name="info">
+                    <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
+                    <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path>
+                    <circle cx="12" cy="8" r="1"></circle>
+                    <path d="M12 10a1 1 0 0 0-1 1v5a1 1 0 0 0 2 0v-5a1 1 0 0 0-1-1z"></path>
+                  </g>
+                </g>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <hr />
+      </div>
+    </div>
+
+    <div id="small-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 w-full p-4 hidden overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div class="relative w-full max-w-md max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow">
+          <div class="flex items-center justify-between p-6 rounded-t">
+            <h3 class="text-base font-medium text-slate-800">Detail Pengguna</h3>
+            <button type="button" class="text-slate-500 bg-transparent hover:bg-slate-50 hover:text-slate-800 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="small-modal">
+              <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+          <!-- Modal body -->
+          <div class="mx-6 mb-2">
+            <p class="text-sm font-medium text-emerald-500 mb-1">3517091601030001</p>
+            <p class="text-xl font-semibold text-slate-800 mb-1">Hanafi Satriyo Utomo Setiawan</p>
+            <p class="text-sm font-norma text-slate-400 mb-8">Jl. Adityawarman No.81 Jombang</p>
+
+            <div class="grid grid-rows-2 mb-8 gap-3">
+              <button onclick="window.location.href='#'" class="text-sm px-4 py-2 text-center font-medium text-white inline-flex flex justify-center rounded-md p-1 bg-emerald-500 hover:bg-emerald-600">
+                <?xml version="1.0"?><svg class="fill-white w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+>>>>>>> 1e9d60673c6275bd5d91f9ffa9354bb60ef1e376
                   <g data-name="Layer 2">
                     <g data-name="info">
                       <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
