@@ -19,19 +19,24 @@
         },
       };
     </script>
-    <% const locale = "id-ID"; const dateOptions = { year: "numeric", month: "long", day: "numeric", }; const formatter = new Intl.NumberFormat(locale, { style: "currency", currency: "IDR", }); %>
+    <% const locale = "id-ID"; const dateOptions = { year: "numeric", month: "long", day: "numeric", }; const formatter = new Intl.NumberFormat(locale, { style: "currency", currency: "IDR", }); const base_payment = formatter.format(invoice.li_base_payment); const penalty = formatter.format(invoice.li_penalty); const total_payment = formatter.format(invoice.li_total_payment);%>
     <title>Bayar</title>
   </head>
   <body class="bg-slate-50 grid place-items-center h-screen">
-    <div class="container bg-white p-8 rounded-xl max-w-md space-y-3 shadow-sm">
+    <div class="container bg-white p-6 rounded-xl max-w-md shadow-sm">
       <!-- <h1 class="font-inter font-bold text-slate-900 text-2xl">Pembayaran<h1> -->
 
-      <div class="grid grid-rows-2 text-center justify-">
+      <div class="grid grid-rows-2 justify-start mb-6 text-align-start">
         <p class="text-slate-400 font-normal">Nominal Tagihan</p>
-        <p class="text-slate-800 font-bold text-3xl"><%= formatter.format(invoice.li_total_payment) %></p>
+        <p class="text-3xl font-bold text-slate-800"><%= total_payment %></p>
       </div>
 
-      <div class="grid grid-cols-2 gap-1 devide-y py-3">
+      <div class="grid grid-rows-2 justify-start bg-orange-50 mb-6 text-align-start rounded-lg p-4 mb-6">
+        <p class="text-orange-400 font-normal opacity-70"><%= user.acc_bank %> Virtual Account</p>
+        <p class="text-lg font-bold text-orange-400">8277 0877 8188 1441</p>
+      </div>
+
+      <!-- <div class="grid grid-cols-2 gap-1 devide-y py-3">
         <div class="grid grid-rows-2 gap-1">
           <p class="text-slate-400 font-normal">No. Virtual Account</p>
           <p class="text-orange-500 font-semibold">8277 0877 8188 1441</p>
@@ -41,11 +46,32 @@
           <p class="text-slate-400 font-normal">Metode Pembayaran</p>
           <p class="text-slate-800 font-semibold"><%= user.acc_bank %> Virtual Account</p>
         </div>
+      </div> -->
+
+      <!-- <hr class="" /> -->
+
+      <div class="grid grid-rows-5 gap-3 bg-slate-50 p-4 rounded-md mb-6">
+        <p class="font-semibold text-slate-700">Rincian Tagihan</p>
+        <div class="flex justify-between">
+          <p class="text-sm text-slate-400 font-normal">Tagihan ke</p>
+          <p class="text-sm text-slate-800 font-medium"><%= `${invoice.li_no}/${invoice.t_lt_period}` %></p>
+        </div>
+        <div class="flex justify-between">
+          <p class="text-sm text-slate-400 font-normal">Cicilan per Bulan</p>
+          <p class="text-sm text-slate-800 font-medium"><%= base_payment %></p>
+        </div>
+        <div class="flex justify-between">
+          <p class="text-sm text-slate-400 font-normal">Penalti</p>
+          <p class="text-sm text-slate-800 font-medium"><%= penalty %></p>
+        </div>
+        <hr class="my-auto h-0.5 bg-slate-200" />
+        <div class="flex justify-between">
+          <p class="text-slate-400 font-normal">Total</p>
+          <p class="text-md text-slate-800 font-semibold"><%= total_payment %></p>
+        </div>
       </div>
 
-      <hr class="" />
-
-      <div class="grid grid-rows-2 gap-1 devide-y">
+      <!-- <div class="grid grid-rows-2 gap-1 devide-y">
         <div class="flex justify-between py-3">
           <p class="text-slate-400 font-normal">Bank Tujuan</p>
           <p class="text-slate-800 font-semibold"><%= user.acc_bank %></p>
@@ -55,10 +81,10 @@
           <p class="text-slate-400 font-normal">No. Rekening Bank</p>
           <p class="text-slate-800 font-semibold"><%= user.acc_bank_num %></p>
         </div>
-      </div>
+      </div> -->
 
       <div class="grid grid-cols-2 gap-4">
-        <a href="/home" class="font-inter text-slate-800 outline outline-1 outline-slate-300 font-medium w-full py-2 px-8 rounded-md hover:bg-slate-50 focus:ring focus:ring-emerald-500">Kembali</a>
+        <a href="/home" class="text-center font-inter text-slate-800 outline outline-1 outline-slate-300 font-medium w-full py-2 px-8 rounded-md hover:bg-slate-50 focus:ring focus:ring-emerald-500">Kembali</a>
         <form id="pay-form" action="/pay" method="POST" style="display: none">
           <input type="hidden" name="id" id="invoice-id" value="<%= invoice.li_id %>" />
         </form>

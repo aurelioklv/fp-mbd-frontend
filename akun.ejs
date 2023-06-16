@@ -8,6 +8,7 @@
       @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@themesberg/flowbite@1.2.0/dist/flowbite.min.css" />
     <script>
       tailwind.config = {
         theme: {
@@ -19,18 +20,31 @@
         },
       };
     </script>
-    <title>Daftar</title>
+    <% const locale = "id-ID"; const dateOptions = { year: "numeric", month: "long", day: "numeric", }; const formatter = new Intl.NumberFormat(locale, { style: "currency", currency: "IDR", }); const salary = formatter.format(user.acc_salary);%>
+    <title>Profil</title>
   </head>
   <body class="bg-slate-50 h-full font-inter">
-    <div class="container bg-white p-8 text-left rounded-xl max-w-4xl space-y-8 shadow-sm mx-auto my-8">
+    <div class="container bg-white p-8 text-left rounded-xl max-w-5xl space-y-8 shadow-sm mx-auto my-8">
       <div class="flex gap-2 content-center justify-between">
         <div class="space-y-1">
           <p class="text-sm tracking-widest text-slate-400 font-normal" id="acc_ktp_num"><%= user.acc_ktp_num %></p>
-          <p class="text-2xl text-slate-700 font-bold" id="acc_name"><%= user.acc_name %></p>
+          <div class="flex gap-4 items-center">
+            <p class="text-2xl text-slate-700 font-bold" id="acc_name"><%= user.acc_name %></p>
+
+            <div class="flex gap-1 items-center bg-orange-50 py-2 px-4 rounded-full">
+              <?xml version="1.0"?><svg class="fill-orange-400 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g data-name="Layer 2"><g data-name="star"><rect width="12" height="12" transform="rotate(90 12 12)" opacity="0"></rect><path d="M17.56 21a1 1 0 0 1-.46-.11L12 18.22l-5.1 2.67a1 1 0 0 1-1.45-1.06l1-5.63-4.12-4a1 1 0 0 1-.25-1 1 1 0 0 1 .81-.68l5.7-.83 2.51-5.13a1 1 0 0 1 1.8 0l2.54 5.12 5.7.83a1 1 0 0 1 .81.68 1 1 0 0 1-.25 1l-4.12 4 1 5.63a1 1 0 0 1-.4 1 1 1 0 0 1-.62.18z"></path></g></g></svg>
+              <p class="text-sm text-orange-400 font-semibold" ><%= user.acc_rating %></p>
+
+            </div>
+
+            
+          </div>
           <p class="text-base text-emerald-500 font-semibold" id="acc_email"><%= user.acc_email %></p>
         </div>
-        <a href="/home">
-          <button class="block my-auto outline outline-1 outline-slate-300 h-8 w-8 rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">
+        <div class="flex gap-3 justify-items-end">
+          <button data-modal-target="modal-ubahDataDiri" data-modal-toggle="modal-ubahDataDiri" class="block my-auto outline outline-1 outline-slate-300 px-3 h-8 font-semibold text-slate-600 text-sm rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">Ubah Data Diri</button>
+
+          <button onclick="window.location.href='/home'" class="block my-auto outline outline-1 outline-slate-300 h-8 w-8 rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">
             <?xml version="1.0"?><svg class="fill-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <g data-name="Layer 2">
                 <g data-name="home">
@@ -40,19 +54,14 @@
               </g>
             </svg>
           </button>
-        </a>
+        </div>
       </div>
 
       <div class="grid grid-cols-2 gap-5">
         <div class="outline outline-1 outline-slate-200 p-4 flex flex-col gap-5 rounded-lg">
-          <div class="flex justify-between content-center">
-            <div>
-              <p class="text-slate-400 text-sm">No. Telepon</p>
-              <p class="text-base text-slate-700 font-semibold" id="acc_phone_num"><%= user.acc_phone_num %></p>
-            </div>
-            <a href="/home" class="block my-auto">
-              <button class="block my-auto outline outline-1 outline-slate-300 px-3 font-semibold text-slate-600 text-sm rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">Ubah Data Diri</button>
-            </a>
+          <div>
+            <p class="text-slate-400 text-sm">No. Telepon</p>
+            <p class="text-base text-slate-700 font-semibold" id="acc_phone_num"><%= user.acc_phone_num %></p>
           </div>
 
           <div>
@@ -72,19 +81,14 @@
 
           <div>
             <p class="text-slate-400 text-sm">Gaji</p>
-            <p class="text-base text-slate-700 font-semibold" id="acc_salary"><%= user.acc_salary %></p>
+            <p class="text-base text-slate-700 font-semibold" id="acc_salary"><%= salary %></p>
           </div>
         </div>
 
-        <div class="outline outline-1 outline-slate-200 p-4 flex flex-col gap-5 rounded-lg">
-          <div class="flex justify-between content-center">
-            <div>
-              <p class="text-slate-400 text-sm">Bank</p>
-              <p class="text-base text-slate-700 font-semibold" id="acc_bank"><%= user.acc_bank %></p>
-            </div>
-            <a href="/home" class="block my-auto">
-              <button class="block my-auto outline outline-1 outline-slate-300 px-3 font-semibold text-slate-600 text-sm rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">Ubah Bank</button>
-            </a>
+        <div class="outline outline-1 outline-slate-200 p-4 flex flex-col justify-between gap-5 rounded-lg">
+          <div>
+            <p class="text-slate-400 text-sm">Bank</p>
+            <p class="text-base text-slate-700 font-semibold" id="acc_bank"><%= user.acc_bank %></p>
           </div>
 
           <div>
@@ -94,14 +98,9 @@
 
           <hr />
 
-          <div class="flex justify-between content-center">
-            <div>
-              <p class="text-slate-400 text-sm">No. Kontak Darurat</p>
-              <p class="text-base text-slate-700 font-semibold" id="acc_emergency_phone_num"><%= user.acc_emergency_phone_num %></p>
-            </div>
-            <a href="/home" class="block my-auto">
-              <button class="block my-auto outline outline-1 outline-slate-300 px-3 font-semibold text-slate-600 text-sm rounded-lg p-1 hover:bg-slate-50 focus:ring focus:ring-emerald-500">Ubah Kontak Darurat</button>
-            </a>
+          <div>
+            <p class="text-slate-400 text-sm">No. Kontak Darurat</p>
+            <p class="text-base text-slate-700 font-semibold" id="acc_emergency_phone_num"><%= user.acc_emergency_phone_num %></p>
           </div>
 
           <div>
@@ -111,7 +110,93 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-3 gap-4">
+      <div class="mx-auto">
+        <button onclick="window.location.href='/logout'" class="text-sm px-4 py-2 text-center font-medium text-rose-500 inline-flex items-center outline outline-1 outline-slate-300 rounded-lg p-1 hover:bg-red-50 hover:outline-red-400 focus:ring focus:ring-red-500">
+          <?xml version="1.0"?><svg class="fill-rose-500 w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <g data-name="Layer 2">
+              <g data-name="log-out">
+                <rect width="24" height="24" transform="rotate(90 12 12)" opacity="0"></rect>
+                <path d="M7 6a1 1 0 0 0 0-2H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h2a1 1 0 0 0 0-2H6V6z"></path>
+                <path d="M20.82 11.42l-2.82-4a1 1 0 0 0-1.39-.24 1 1 0 0 0-.24 1.4L18.09 11H10a1 1 0 0 0 0 2h8l-1.8 2.4a1 1 0 0 0 .2 1.4 1 1 0 0 0 .6.2 1 1 0 0 0 .8-.4l3-4a1 1 0 0 0 .02-1.18z"></path>
+              </g>
+            </g>
+          </svg>
+
+          Keluar
+        </button>
+      </div>
+
+      <div id="modal-ubahDataDiri" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 w-full p-4 hidden overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative w-full max-w-3xl max-h-full">
+          <!-- Modal content -->
+          <div class="relative bg-white rounded-lg shadow">
+            <div class="flex items-center justify-between p-6 rounded-t">
+              <h3 class="text-base font-semibold text-slate-800">Ubah Data Diri</h3>
+              <button type="button" class="text-slate-500 bg-transparent hover:bg-slate-50 hover:text-slate-800 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="modal-ubahDataDiri">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <span class="sr-only">Close modal</span>
+              </button>
+            </div>
+            <form action="/account" method="post" id="update-form">
+              <!-- Modal body -->
+              <div class="grid grid-cols-2 gap-6 mx-6 mb-2">
+                <div class="space-y-5">
+                  <div>
+                    <label for="phone" class="block mb-2 text-sm font-medium text-slate-400">No. Telepon</label>
+                    <input required pattern="^0\d{9,}$" name="phone" type="tel" class="bg-white border border-1 border-slate-200 rounded-md h-10 p-4 w-full focus:ring-emerald-500 focus:border-emerald-500 placeholder:text-slate-400 invalid:text-red-500 invalid:ring-red-500" value="<%= user.acc_phone_num %>" />
+                  </div>
+
+                  <div>
+                    <label for="address" class="block mb-2 text-sm font-medium text-slate-400">Alamat Lengkap</label>
+                    <input required name="address" type="text" class="bg-white border border-1 border-slate-200 rounded-md h-10 p-4 w-full focus:ring-emerald-500 focus:border-emerald-500 placeholder:text-slate-400" value="<%= user.acc_address %>" />
+                  </div>
+
+                  <div>
+                    <label for="job" class="block mb-2 text-sm font-medium text-slate-400">Pekerjaan</label>
+                    <input required name="job" type="text" class="bg-white border border-1 border-slate-200 rounded-md h-10 p-4 w-full focus:ring-emerald-500 focus:border-emerald-500 placeholder:text-slate-400" value="<%= user.acc_job %>" />
+                  </div>
+
+                  <div>
+                    <label for="salary_formatted" class="block mb-2 text-sm font-medium text-slate-400">Gaji</label>
+                    <input required id="salary-input-formatted" name="salary_formatted" maxlength="10" type="text" inputmode="numeric" oninput="formatNumber(this)" onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 46 || event.charCode === 0" class="bg-white border border-1 border-slate-200 rounded-md h-10 p-4 w-full focus:ring-emerald-500 focus:border-emerald-500 placeholder:text-slate-400" value="<%= new Intl.NumberFormat("id-ID").format(user.acc_salary) %>" />
+                    <input type="hidden" name="salary" id="salary-input" />
+                  </div>
+                </div>
+
+                <div class="space-y-5">
+                  <div>
+                    <label for="bank" class="block mb-2 text-sm font-medium text-slate-400">Bank</label>
+                    <input required name="bank" type="text" class="bg-white border border-1 border-slate-200 rounded-md h-10 p-4 w-full focus:ring-emerald-500 focus:border-emerald-500 placeholder:text-slate-400" value="<%= user.acc_bank %>" />
+                  </div>
+
+                  <div>
+                    <label for="bank_num" class="block mb-2 text-sm font-medium text-slate-400">Nomor Rekening</label>
+                    <input required name="bank_num" maxlength="16" type="number" class="bg-white border border-1 border-slate-200 rounded-md h-10 p-4 w-full focus:ring-emerald-500 focus:border-emerald-500 placeholder:text-slate-400" value="<%= user.acc_bank_num %>" />
+                  </div>
+
+                  <div>
+                    <label for="job" class="block mb-2 text-sm font-medium text-slate-400">No. Kontak Darurat</label>
+                    <input required pattern="^0\d{9,}$" name="emergency_contact" type="tel" class="bg-white border border-1 border-slate-200 rounded-md h-10 p-4 w-full focus:ring-emerald-500 focus:border-emerald-500 placeholder:text-slate-400 invalid:text-red-500 invalid:ring-red-500" value="<%= user.acc_emergency_phone_num %>" />
+                  </div>
+
+                  <div>
+                    <label for="salary_formatted" class="block mb-2 text-sm font-medium text-slate-400">Hubungan Kontak Darurat</label>
+                    <input required name="emergency_contact_rel" type="text" class="bg-white border border-1 border-slate-200 rounded-md h-10 p-4 w-full focus:ring-emerald-500 focus:border-emerald-500 placeholder:text-slate-400" value="<%= user.acc_emergency_contact_relationship %>" />
+                  </div>
+                </div>
+
+                <!-- <p class="text-xs text-slate-400">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id nostrum nulla temporibus error explicabo voluptatibus maxime praesentium vero sequi, nobis, tempore earum quaerat eum mollitia?</p> -->
+              </div>
+              <!-- Modal footer -->
+              <div class="flex items-center p-6 space-x-2 rounded-b">
+                <button type="submit" class="font-inter font-medium w-full py-2 px-8 rounded-md bg-emerald-500 text-white hover:bg-emerald-600">Simpan</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="grid grid-cols-3 gap-4">
         <div class="space-y-2">
           <p class="font-semibold text-sm">NPWP</p>
           <div class="rounded-lg aspect-[3/2] bg-cover" style="background-image: url(https://source.unsplash.com/featured/600x300)"></div>
@@ -124,7 +209,31 @@
           <p class="font-semibold text-sm">Selfie</p>
           <div class="rounded-lg aspect-[3/2] bg-cover" style="background-image: url(https://source.unsplash.com/featured/600x300)"></div>
         </div>
-      </div>
+      </div> -->
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+    <script>
+      const form = document.getElementById("update-form");
+      const salaryInput = document.getElementById("salary-input");
+      const salaryInputFormatted = document.getElementById("salary-input-formatted");
+
+      function formatNumber(input) {
+        const value = input.value.replace(/[.,]/g, "");
+        const formattedValue = new Intl.NumberFormat("id-ID").format(value);
+
+        input.value = formattedValue;
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        let salary = salaryInputFormatted.value;
+        salary = salary.replace(/\./g, "");
+        salaryInput.value = salary;
+
+        form.submit();
+      });
+    </script>
   </body>
 </html>

@@ -26,11 +26,9 @@
     <div class="container bg-white p-8 rounded-xl max-w-md space-y-8 shadow-sm">
       <h1 class="font-inter font-bold text-slate-900 text-2xl">Ajukan Peminjaman</h1>
 
-      <div class="bg-orange-50 p-4 w-full rounded-md space-y-1">
-        <div class="flex justify-between">
-          <p class="text-sm text-orange-400 mb-1 my-auto font-medium">Limit Peminjaman</p>
-          <h2 class="text-2xl font-bold text-orange-500"><%= formatter.format(user.acc_balance) %></h2>
-        </div>
+      <div class="grid grid-rows-2 justify-between bg-orange-50 p-4 w-full rounded-md">
+        <p class="text-sm text-orange-400 my-auto font-medium">Limit Peminjaman</p>
+        <h2 class="text-2xl font-bold text-orange-500"><%= formatter.format(user.acc_balance) %></h2>
       </div>
 
       <form action="/confirm" method="post" class="items-stretch space-y-4 my-6" id="loan-form">
