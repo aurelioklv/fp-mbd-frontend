@@ -127,7 +127,7 @@
                     <p class="text-sm font-semibold py-2 px-6 w-auto rounded-full text-center text-sky-400 bg-sky-50">Periode <%= transaction.t_lt_period %> Bulan</p>
                   </div>
                   <p class="font-semibold text-slate-700 mb-4">Tagihan</p>
-                  <% const tr_invoices = invoices.filter((invoice)=>invoice.li_t_id===transaction.t_id) %> <% tr_invoices.forEach(invoice => { %>
+                  <% const tr_invoices = invoices.filter((invoice)=>invoice.li_t_id===transaction.t_id).sort((a,b)=>a.li_no - b.li_no) %> <% tr_invoices.forEach(invoice => { %>
                   <div class="border border-slate-200 p-4 rounded-md mb-3">
                     <div class="flex justify-between">
                       <div class="grid grid-rows-2">
