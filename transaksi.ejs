@@ -179,14 +179,12 @@
               <% if (log.li_status) { %>
               <h2 class="text-md font-semibold text-emerald-500 li_total_payment">+<%= formatter.format(log.log_money) %></h2>
               <% } else { %>
-              <h2 class="text-md font-semibold text-red-500 li_total_payment">-<%= formatter.format(log.log_money) %></h2>
+              <h2 class="text-md font-semibold text-rose-500 li_total_payment">-<%= formatter.format(log.log_money) %></h2>
               <% } %>
             </div>
             <div class="flex gap-1 m-auto">
-              
               <h2 class="text-sm font-medium text-slate-700 li_due_date"><%= log_date %>,</h2>
               <h2 class="text-sm font-medium text-slate-700 li_due_date"><%= log_time %></h2>
-              
             </div>
           </div>
           <hr />
